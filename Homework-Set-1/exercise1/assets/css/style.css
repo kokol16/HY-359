@@ -1,0 +1,56 @@
+html,
+body {
+  background-color: rgb(11, 137, 187);
+}
+
+section {
+  display: block;
+}
+header {
+  text-align: center;
+  color: white;
+}
+a {
+  color: white;
+}
+a:visited {
+  color: pink;
+}
+a:hover {
+  color: rgb(52, 228, 175);
+}
+p,
+ul {
+  color: white;
+}
+h2 {
+  color: antiquewhite;
+}
+mark {
+  background-color: yellow;
+}
+#my-image {
+  width: 300px;
+}
+
+/* Style all font awesome icons */
+.fa {
+  padding: 25px 25px 25px 25px;
+  font-size: 50px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+/* Facebook */
+.fa-slack {
+  background: rgb(155, 14, 14);
+}
+
+/* Twitter */
+.fa-android {
+  background: #0bc099;
+  color: white;
+}
