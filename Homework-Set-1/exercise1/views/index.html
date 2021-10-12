@@ -2,14 +2,13 @@
 <html>
 
 <head>
-    <title>Georgios Kokolaksi CV </title>
+    <title>Georgios Kokolakis CV </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="description" content="My CV">
     <meta name="keywords" content="HTML, CSS, JavaScript, CV">
     <meta name="author" content="Georgios Kokolakis">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -21,12 +20,10 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <header>Georgios Kokolakis CV </header>
-        </div>
+
 
         <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
                 <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,11 +48,89 @@
             </nav>
         </div>
         <div class="row">
-            <img id="my-image" \ src="../assets/images/milos_image.jpg" class="rounded-circle" alt="Image not found"
-                onerror=this.src="../assets/images/error_image.jpg">
+            <header>Georgios Kokolakis  </header>
         </div>
         <div class="row">
-            <div class="col-4">
+
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <article>
+                    <section>
+                        <h2>Education</h2>
+                        <p>Finished second high school of Malia</p>
+                        <p>Currently studying computer science at University of Crete
+                        </p>
+
+                        <a href="https://www.csd.uoc.gr/">Visit Computer Science Departmen of Crete!</a>
+
+
+                    </section>
+                    <section>
+                        <h2>Honors and awards</h2>
+                        <p><mark>Undergraduate</mark> Scholarship at <abbr title="TNL"> Telecommunications and
+                                Networks
+                                Lab</abbr> of ICS-FORTH (Nov
+                            2020 - July 2021) </p>
+                        <p><mark>Undergraduate</mark> Scholarship at <abbr title="DISCS"> Distributed Computing
+                                Systems Lab
+                            </abbr> FORTH (Oct 2021)
+                        </p>
+                    </section>
+                    <section>
+
+                        <h2>My Interests</h2>
+
+                        <ul>
+                            <li>Programming</li>
+                            <li>Basketball</li>
+                            <li>Gym</li>
+                        </ul>
+                    </section>
+                </article>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                <img id="my-image"  src="../assets/images/milos_image.jpg" class="rounded-circle" alt="Image not found"
+                    onerror="this.src='../assets/images/error_image.jpg' ">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <table class="table table-light table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Lesson</th>
+                            <th scope="col">Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">HY-457</th>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">HY-150</th>
+                            <td>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12  mt-2">
+                <a href="#" class="fa fa-slack"></a>
+                <a href="#" class="fa fa-android"></a>
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+
+                <video width="320" height="240" controls>
+                    <source src="../assets/videos/Cat.mp4" id="cat-video" type="video/mp4">
+                    Your browser does not support the audio element.
+                </video>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4 col-sm-12">
 
                 <audio controls>
                     <source src="../assets/music/bensound-creativeminds.mp3" type="audio/mpeg">
@@ -67,99 +142,25 @@
         </div>
         <div class="row">
 
-            <div class="col-4">
-
-                <video width="320" height="240" controls>
-                    <source src="../assets/videos/Cat - 66004 (1).mp4" id="cat-video" type="video/mp4">
-                    Your browser does not support the audio element.
-                </video>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-4">
-                <a href="#" class="fa fa-slack"></a>
-                <a href="#" class="fa fa-android"></a>
-
-            </div>
-
-
-        </div>
-        <div class="row">
-
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
 
                 <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY">
                 </iframe>
             </div>
         </div>
+        <div class="row">
 
-        <article>
-            <section>
-                <h2>Education</h2>
-                <p>Finished second high school of Malia</p>
-                <p>Currently studying computer science at University of Crete
-                </p>
-
-                <a href="https://www.csd.uoc.gr/">Visit Computer Science Departmen of Crete!</a>
-
-
-            </section>
-            <section>
-                <h2>Honors and awards</h2>
-                <p><mark>Undergraduate</mark> Scholarship at <abbr title="TNL"> Telecommunications and
-                        Networks
-                        Lab</abbr> of ICS-FORTH (Nov
-                    2020 - July 2021) </p>
-                <p><mark>Undergraduate</mark> Scholarship at <abbr title="DISCS"> Distributed Computing
-                        Systems Lab
-                    </abbr> FORTH (Oct 2021)
-                </p>
-            </section>
-            <section>
-
-                <h2>My Interests</h2>
-
-                <ul>
-                    <li>Programming</li>
-                    <li>Basketball</li>
-                    <li>Gym</li>
-                </ul>
-            </section>
-        </article>
-        <div class="col-5">
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Lesson</th>
-                        <th scope="col">Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">HY-457</th>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">HY-150</th>
-                        <td>10</td>
-                    </tr>
-                </tbody>
-            </table>
+            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+                <div class="container text-center">
+                    <small>Copyright &copy; Kokolakis Georgios</small>
+                </div>
+            </footer>
         </div>
-
     </div>
 
-    <div class="row">
 
-        <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
-            <div class="container text-center">
-                <small>Copyright &copy; Kokolakis Georgios</small>
-            </div>
-        </footer>
-    </div>
-    </div>
+
+
 
 </body>
 
