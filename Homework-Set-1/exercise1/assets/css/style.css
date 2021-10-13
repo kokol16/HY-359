@@ -1,40 +1,48 @@
-html,
-body {
-  background-color: rgb(11, 137, 187);
+html, body {
+  background-color: rgb(24, 96, 124);
 }
 
 section {
   display: block;
 }
+
 header {
   text-align: center;
   color: white;
   font-size: 3rem;
+  text-align: left;
 }
+
 a {
   color: white;
 }
+
 a:visited {
   color: pink;
 }
+
 a:hover {
   color: rgb(52, 228, 175);
 }
-p,
-ul {
+
+p, ul {
   color: white;
 }
+
 h2 {
   color: antiquewhite;
 }
+
 mark {
   background-color: yellow;
 }
+
 #my-image {
-  width: 300px;
+  width: 250px;
 }
 
 /* Style all font awesome icons */
+
 .fa {
   padding: 25px 25px 25px 25px;
   font-size: 50px;
@@ -46,12 +54,23 @@ mark {
 }
 
 /* Facebook */
-.fa-slack {
+
+.fa-slack, .fa-github {
   background: rgb(155, 14, 14);
 }
 
 /* Twitter */
+
 .fa-android {
   background: #0bc099;
   color: white;
+}
+
+.navbar {
+  background-color: rgb(26, 79, 100);
+}
+
+#form-card {
+  background-color: red;
+  color: red
 }
