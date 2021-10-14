@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Form</title>
@@ -21,7 +21,7 @@
             <form>
                 <div class="form-group row justify-content-start mt-2 ">
                     <div class="col-lg-5">
-                        <input type="username" class="form-control" placeholder="Enter username" pattern=".{8,}">
+                        <input type="text" class="form-control" placeholder="Enter username" pattern=".{8,}">
                     </div>
                     <div class="col-lg-5">
 
@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-lg-5">
 
-                        <input type="verify-password" class="form-control" placeholder="Re enter password"
+                        <input type="password" class="form-control" placeholder="Re enter password"
                             pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}">
                     </div>
 
@@ -46,7 +46,7 @@
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="doctor-radio" type="radio" name="gridRadios" value>
                             <label class="form-check-label" for="doctor-radio">
                                 Doctor
                             </label>
@@ -55,8 +55,8 @@
 
                         <div class="form-check">
 
-                            <input class="form-check-input" type="radio" name="gridRadios" value>
-                            <label class="form-check-label" for="defaul-radio">
+                            <input class="form-check-input" id="default-radio" type="radio" name="gridRadios" value>
+                            <label class="form-check-label" for="default-radio">
                                 Other
                             </label>
                         </div>
@@ -65,7 +65,7 @@
                     <div class="col-6">
 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="man" type="radio" name="gridRadios" value>
                             <label class="form-check-label" for="man">
                                 Man
                             </label>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-check">
 
-                            <input class="form-check-input" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="woman" type="radio" name="gridRadios" value>
                             <label class="form-check-label" for="woman">
                                 Woman
                             </label>
@@ -85,11 +85,11 @@
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-lg-5">
 
-                        <input type="name" class="form-control" placeholder="Enter Name" pattern=".{3,30}">
+                        <input type="text" class="form-control" placeholder="Enter Name" pattern=".{3,30}">
                     </div>
                     <div class="col-lg-5">
 
-                        <input type="surname" class="form-control" placeholder="Enter Surname" pattern=".{3,30}">
+                        <input type="text" class="form-control" placeholder="Enter Surname" pattern=".{3,30}">
                     </div>
                 </div>
 
@@ -120,7 +120,7 @@
 
                     <div class="col-lg-5">
 
-                        <select id="country" name="country">
+                        <select id="country" name="country" required>
                             <option value="Afganistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -206,7 +206,7 @@
                             <option value="Ghana">Ghana</option>
                             <option value="Gibraltar">Gibraltar</option>
                             <option value="Great Britain">Great Britain</option>
-                            <option value="Greece" selected="Greece">Greece</option>
+                            <option value="Greece" selected>Greece</option>
                             <option value="Greenland">Greenland</option>
                             <option value="Grenada">Grenada</option>
                             <option value="Guadeloupe">Guadeloupe</option>
@@ -379,7 +379,7 @@
 
                     <div class="col-lg-5">
 
-                        <input type="address" class="form-control" placeholder="Enter Address" pattern=".{5,50}">
+                        <input type="text" class="form-control" placeholder="Enter Address" pattern=".{5,50}">
                     </div>
 
                 </div>
@@ -391,8 +391,7 @@
                     </div>
                     <div class="col-lg-5">
 
-                        <input type="number" class="form-control" placeholder="Height (cm)" min=100 max=250
-                            pattern="[0-9]">
+                        <input type="number" class="form-control" placeholder="Height (cm)" min=100 max=250>
                     </div>
 
                 </div>
@@ -400,17 +399,16 @@
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-lg-5">
 
-                        <input type="text" class="form-control" placeholder="weight" min=20 max=300
-                            pattern="^[0-9]*\.[0-9][0-9]$">
+                        <input type="number" class="form-control" placeholder="weight" min=20 max=300 step="0.01">
                     </div>
 
                 </div>
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-lg-6">
 
-                        <label for="Volunteer">Volunteer blood giver?</label>
+                        <label>Volunteer blood giver?</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="yes" type="radio" name="gridRadios" value>
                             <label class="form-check-label" for="yes">
                                 Yes
                             </label>
@@ -418,7 +416,7 @@
 
                         <div class="form-check">
 
-                            <input class="form-check-input" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="no" type="radio" name="gridRadios" value>
                             <label class="form-check-label" for="no">
                                 No
                             </label>
@@ -451,7 +449,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value name="checkbox">
+                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" value name="checkbox">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Do you agree with the terms?
                             </label>
@@ -462,10 +460,9 @@
 
                 </div>
 
-        </div>
 
-        </form>
-    </div>
+            </form>
+        </div>
     </div>
 
 
