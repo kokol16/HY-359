@@ -19,6 +19,9 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/el_GR/sdk.js#xfbml=1&version=v12.0"
+        nonce="U9ebNnt6"></script>
     <div class="container-fluid">
 
 
@@ -50,12 +53,42 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12">
+                <figure>
+                    <img id="my-image" src="../assets/images/milos_image.jpg" class="rounded-circle"
+                        alt="Image not found" onerror="this.src='../assets/images/error_image.jpg' ">
+                    <figcaption>
+                        <aside>
+                            <h2>Music</h2>
+                            <ul>
+                                <li>Pop</li>
+                                <li>Trap</li>
+                                <li>Rock</li>
+                            </ul>
+                        </aside>
+                        <aside>
 
-                <img id="my-image" src="../assets/images/milos_image.jpg" class="rounded-circle" alt="Image not found"
-                    onerror="this.src='../assets/images/error_image.jpg' ">
+                            <section>
+
+                                <h2>Hobbies</h2>
+                                <ol>
+                                    <li>Programming</li>
+                                    <li>Basketball</li>
+                                    <li>Gym</li>
+                                </ol>
+
+
+                            </section>
+                        </aside>
+                    </figcaption>
+                </figure>
+
+
+
             </div>
+
             <div class="col-lg-4 col-md-6 col-sm-12 ">
                 <article>
+
                     <section>
                         <h2>Education</h2>
                         <p>Finished second high school of Malia</p>
@@ -75,25 +108,22 @@
                         <p><mark>Undergraduate</mark> Scholarship at <abbr title="DISCS"> Distributed Computing
                                 Systems Lab
                             </abbr> FORTH (Oct 2021)
+
                         </p>
+                        <blockquote cite="https://blog.hubspot.com/sales/famous-quotes">
+                            <p>When you reach the end of your rope, tie a knot in it and hang on. </p>
+                            <p>Quote by -Franklin D. Roosevelt </p>
+                        </blockquote>
                     </section>
-                    <section>
 
-                        <h2>Hobbies</h2>
 
-                        <ul>
-                            <li>Programming</li>
-                            <li>Basketball</li>
-                            <li>Gym</li>
-                        </ul>
-                    </section>
 
                 </article>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 ">
                 <article>
                     <section>
-                        <h2>Skills</h2>
+                        <h1>Skills</h1>
                         <p>Programming languages: C, C++, Java, NodeJs, HTML, CSS, js</p>
                         <p>Technologies and frameworks: Kubernetes, Helm, Docker, Cybersecurity, Android, ELK Stack,
                             Boostrap
@@ -103,7 +133,7 @@
 
                     </section>
                     <section>
-                        <h2>Projects</h2>
+                        <h3>Projects</h3>
                         <p>HoneyChart: A tool for the creation of a helm chart that consists of well known honeypots,
                             defined by user input</p>
                         <p>kubernetes && honeypots && ELK: This is a system, that has a kubernetes cluster where
@@ -123,8 +153,10 @@
 
         <div class="row">
 
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <table class="table table-light table-striped">
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+
+                <table class="table lessons-table ">
                     <thead>
                         <tr>
                             <th scope="col">Lesson</th>
@@ -152,52 +184,53 @@
                             <th scope="row">HY-457</th>
                             <td>10</td>
                         </tr>
-                        <tr>
-                            <th scope="row">HY-457</th>
-                            <td>10</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12  embed-responsive embed-responsive-16by9">
+            <div class="col-lg-6 col-xl-5 col-md-6 col-sm-12 embed-responsive  embed-responsive-16by9">
 
-                <iframe width="240" height="240" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                <iframe width="240" height="167" src="https://www.youtube.com/embed/tgbNymZ7vqY">
                 </iframe>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 embed-responsive embed-responsive-16by9">
-
-                <video width="240" height="240" controls>
+                <video width="240" height="200" controls>
                     <source src="../assets/videos/Cat.mp4" id="cat-video" type="video/mp4">
                     Your browser does not support the audio element.
                 </video>
             </div>
 
-
-        </div>
-
-        <div class="row">
-            <div class="col-6">
+            <div class="col-lg-12 col-xl-3 mt-3">
                 <audio controls>
                     <source src="../assets/music/bensound-creativeminds.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
             </div>
+
         </div>
+
+
+
+
+
 
 
         <div class="row">
-            <div class="col-lg-1 col-md-2 col-sm-1  mt-2">
-                <a href="#" class="fa fa-slack"></a>
-            </div>
-            <div class="col-lg-1 col-md-2 col-sm-1  mt-2">
 
-                <a href="#" class="fa fa-android"></a>
-            </div>
-            <div class="col-lg-1 col-md-2 col-sm-1  mt-2">
+            <a href="#" class="fa fa-slack     "></a>
 
-                <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-android   "></a>
+
+            <a href="#" class="fa fa-github "></a>
+
+
+            <div class="fb-share-button col-3 mt-5" data-href="https://www.facebook.com/george.georgegk"
+                data-layout="button" data-size="large"><a target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fgeorge.georgegk&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore">Share</a>
             </div>
+
         </div>
+
+
         <div class="row">
 
             <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">

@@ -1,5 +1,7 @@
-html, body {
+html,
+body {
   background-color: rgb(24, 96, 124);
+  font-weight: bold;
 }
 
 section {
@@ -13,24 +15,30 @@ header {
   text-align: left;
 }
 
-a {
+a,
+figcaption {
   color: white;
 }
 
-a:visited {
+a:visited,
+a:active {
   color: pink;
 }
 
-a:hover {
+a:hover,
+a:link {
   color: rgb(52, 228, 175);
 }
 
-p, ul {
+p,
+ul {
   color: white;
 }
 
-h2 {
-  color: antiquewhite;
+h2,
+h3,
+h1 {
+  color: rgb(255, 255, 255);
 }
 
 mark {
@@ -55,7 +63,8 @@ mark {
 
 /* Facebook */
 
-.fa-slack, .fa-github {
+.fa-slack,
+.fa-github {
   background: rgb(155, 14, 14);
 }
 
@@ -72,5 +81,17 @@ mark {
 
 #form-card {
   background-color: red;
-  color: red
+  color: red;
+}
+aside {
+  margin-top: 1rem;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  float: left;
+  background-color: rgb(26, 79, 100);
+}
+.lessons-table {
+  background-color: rgb(26, 79, 100);
+  color: white;
 }
