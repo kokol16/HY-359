@@ -15,38 +15,115 @@
 </head>
 
 <body>
-    <div class="row container">
-        <div class="col-2"></div>
-        <div class="form-card col-6 container ">
+    <div class="row  container-fluid mt-5 card-container  ">
+        <div class="form-card col-xl-6 col-xxl-4 col-lg-6 col-md-8 col-sm-8 container-fluid ">
             <form>
                 <div class="form-group row justify-content-start mt-2 ">
-                    <div class="col-lg-5">
-                        <input type="text" class="form-control" placeholder="Enter username" pattern=".{8,}">
+                    <div class="col-lg-5 col-md-6 col-sm-6  ">
+                        <input type="text" class="form-control" placeholder="Enter username" pattern=".{8,}" required>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-5 col-md-6 col-sm-6">
 
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <input type="email" class="form-control" placeholder="Enter email" required>
                     </div>
                 </div>
                 <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-5">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
 
                         <input type="password" class="form-control" placeholder="Enter Password"
-                            pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}">
+                            pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}" required>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
 
                         <input type="password" class="form-control" placeholder="Re enter password"
-                            pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}">
+                            pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}" required>
+                    </div>
+
+
+                </div>
+                <div class="form-group row justify-content-start mt-2">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="text" class="form-control" placeholder="Enter Name" pattern=".{3,30}" required>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="text" class="form-control" placeholder="Enter Surname" pattern=".{3,30}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-start mt-2">
+
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="date" class="form-control" value="1980-01-01" min="1920-01-01" max="2005-12-31"
+                            required>
+
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="text" class="form-control" pattern="[0-9]{11}" placeholder="Enter AMKA" required>
                     </div>
 
 
                 </div>
 
+                <div class="form-group row justify-content-start mt-2">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="text" class="form-control" placeholder="Enter City" pattern=".{3,50}" required>
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="text" class="form-control" placeholder="Enter Address" pattern=".{5,50}" required>
+                    </div>
+
+                </div>
+
+                <div class="form-group row justify-content-start mt-2">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="number" class="form-control" placeholder="weight" min=20 max=300 step="0.01">
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="number" class="form-control" placeholder="Height (cm)" min=100 max=250>
+                    </div>
+
+                </div>
+                <div class="form-group row justify-content-start mt-2">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+
+                        <input type="text" class="form-control" placeholder="Telephone Number" pattern="[0-9]{0,14}"
+                            required>
+                    </div>
+
+                    <div class="col-lg-6 dropdown">
+
+                        <button class="btn btn-primary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Blood group
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Α-</a></li>
+                            <li><a class="dropdown-item" href="#">Α+</a></li>
+                            <li><a class="dropdown-item" href="#">Β-</a></li>
+                            <li><a class="dropdown-item" href="#">Β+</a></li>
+                            <li><a class="dropdown-item" href="#">AΒ-</a></li>
+                            <li><a class="dropdown-item" href="#">AΒ+</a></li>
+                            <li><a class="dropdown-item" href="#">0-</a></li>
+                            <li><a class="dropdown-item" href="#">0+</a></li>
+                            <li><a class="dropdown-item" href="#">Unknown</a></li>
+
+                        </ul>
+                    </div>
+                </div>
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-6">
                         <div class="form-check">
-                            <input class="form-check-input" id="doctor-radio" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="doctor-radio" type="radio" name="type-of-user-radio" value>
                             <label class="form-check-label" for="doctor-radio">
                                 Doctor
                             </label>
@@ -55,7 +132,7 @@
 
                         <div class="form-check">
 
-                            <input class="form-check-input" id="default-radio" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="default-radio" type="radio" name="type-of-user-radio" value>
                             <label class="form-check-label" for="default-radio">
                                 Other
                             </label>
@@ -65,7 +142,7 @@
                     <div class="col-6">
 
                         <div class="form-check">
-                            <input class="form-check-input" id="man" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="man" type="radio" name="gender-radio" value>
                             <label class="form-check-label" for="man">
                                 Man
                             </label>
@@ -73,7 +150,7 @@
                         </div>
                         <div class="form-check">
 
-                            <input class="form-check-input" id="woman" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="woman" type="radio" name="gender-radio" value>
                             <label class="form-check-label" for="woman">
                                 Woman
                             </label>
@@ -82,30 +159,8 @@
 
                 </div>
 
-                <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-5">
-
-                        <input type="text" class="form-control" placeholder="Enter Name" pattern=".{3,30}">
-                    </div>
-                    <div class="col-lg-5">
-
-                        <input type="text" class="form-control" placeholder="Enter Surname" pattern=".{3,30}">
-                    </div>
-                </div>
 
 
-                <div class="form-group row justify-content-start mt-2">
-
-                    <div class="col-lg-5">
-
-                        <input type="date" class="form-control" value="1980-01-01" min="1920-01-01" max="2005-12-31">
-
-                    </div>
-
-
-
-
-                </div>
 
 
 
@@ -113,12 +168,9 @@
 
 
                 <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-5">
 
-                        <input type="text" class="form-control" pattern="[0-9]{11}" placeholder="Enter AMKA">
-                    </div>
 
-                    <div class="col-lg-5">
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
 
                         <select id="country" name="country" required>
                             <option value="Afganistan">Afghanistan</option>
@@ -371,90 +423,51 @@
                     </div>
                 </div>
 
-                <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-5">
 
-                        <input type="text" class="form-control" placeholder="Enter City" pattern=".{3,50}">
-                    </div>
 
-                    <div class="col-lg-5">
 
-                        <input type="text" class="form-control" placeholder="Enter Address" pattern=".{5,50}">
-                    </div>
 
-                </div>
 
-                <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-5">
-
-                        <input type="text" class="form-control" placeholder="Telephone Number" pattern="[0-9]{0,14}">
-                    </div>
-                    <div class="col-lg-5">
-
-                        <input type="number" class="form-control" placeholder="Height (cm)" min=100 max=250>
-                    </div>
-
-                </div>
-
-                <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-5">
-
-                        <input type="number" class="form-control" placeholder="weight" min=20 max=300 step="0.01">
-                    </div>
-
-                </div>
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-lg-6">
-
                         <label>Volunteer blood giver?</label>
                         <div class="form-check">
-                            <input class="form-check-input" id="yes" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="yes" type="radio" name="blood-giver-radio" value>
                             <label class="form-check-label" for="yes">
                                 Yes
                             </label>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="form-check">
+                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" value name="checkbox"
+                                required>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                I agree to terms
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
 
                         <div class="form-check">
 
-                            <input class="form-check-input" id="no" type="radio" name="gridRadios" value>
+                            <input class="form-check-input" id="no" type="radio" name="blood-giver-radio" value>
                             <label class="form-check-label" for="no">
                                 No
                             </label>
                         </div>
                     </div>
-                    <div class="col-lg-6 dropdown">
 
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Blood group
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Α-</a></li>
-                            <li><a class="dropdown-item" href="#">Α+</a></li>
-                            <li><a class="dropdown-item" href="#">Β-</a></li>
-                            <li><a class="dropdown-item" href="#">Β+</a></li>
-                            <li><a class="dropdown-item" href="#">AΒ-</a></li>
-                            <li><a class="dropdown-item" href="#">AΒ+</a></li>
-                            <li><a class="dropdown-item" href="#">0-</a></li>
-                            <li><a class="dropdown-item" href="#">0+</a></li>
-                            <li><a class="dropdown-item" href="#">Unknown</a></li>
 
-                        </ul>
-                    </div>
 
                 </div>
                 <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-check">
-                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" value name="checkbox">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Do you agree with the terms?
-                            </label>
-                        </div>
-                    </div>
+
 
 
 
