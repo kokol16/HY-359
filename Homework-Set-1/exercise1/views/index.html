@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Georgios Kokolakis CV </title>
@@ -16,6 +16,8 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/media_querries.css">
+
 </head>
 
 <body>
@@ -26,25 +28,26 @@
 
 
         <div class="row">
-            <nav class="navbar navbar-expand-lg col-12  ">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Find Me<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Progress</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About Me </a>
-                        </li>
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#media">Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Education">Education</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Skills">Skills</a>
+                            </li>
+                        </ul>
 
-                    </ul>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -88,14 +91,16 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12 ">
                 <article>
-
-                    <section>
+                    <h1>Education && Honors</h1>
+                    
+                    <section id="Education">
                         <h2>Education</h2>
                         <p>Finished second high school of Malia</p>
                         <p>Currently studying computer science at University of Crete
                         </p>
-
-                        <a href="https://www.csd.uoc.gr/">Visit Computer Science Departmen of Crete!</a>
+                        <p>Press <kbd>Ctrl</kbd> + <kbd> left click</kbd>
+                            <a class="csd-link" href="https://www.csd.uoc.gr/">Visit Computer Science Departmen of
+                                Crete!</a>
 
 
                     </section>
@@ -120,10 +125,12 @@
 
                 </article>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 ">
+            <div class="col-lg-4 col-md-12 col-sm-12 ">
                 <article>
-                    <section>
-                        <h1>Skills</h1>
+                    <h2>Skills && Projects</h2>
+                    
+                    <section id="Skills">
+                        <h2>Skills</h2>
                         <p>Programming languages: C, C++, Java, NodeJs, HTML, CSS, js</p>
                         <p>Technologies and frameworks: Kubernetes, Helm, Docker, Cybersecurity, Android, ELK Stack,
                             Boostrap
@@ -188,7 +195,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-6 col-xl-5 col-md-6 col-sm-12 embed-responsive  embed-responsive-16by9">
+            <div class=" col-xl-4 col-lg-8 col-md-8 col-sm-12 embed-responsive  embed-responsive-16by9">
 
                 <iframe width="240" height="167" src="https://www.youtube.com/embed/tgbNymZ7vqY">
                 </iframe>
@@ -213,7 +220,7 @@
 
 
 
-        <div class="row">
+        <div class="row" id="media">
 
             <a href="#" class="fa fa-slack     "></a>
 
@@ -222,8 +229,8 @@
             <a href="#" class="fa fa-github "></a>
 
 
-            <div class="fb-share-button col-3 mt-5" data-href="https://www.facebook.com/george.georgegk"
-                data-layout="button" data-size="large"><a target="_blank"
+            <div class="fb-share-button col-3" data-href="https://www.facebook.com/george.georgegk" data-layout="button"
+                data-size="large"><a target="_blank"
                     href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fgeorge.georgegk&amp;src=sdkpreparse"
                     class="fb-xfbml-parse-ignore">Share</a>
             </div>

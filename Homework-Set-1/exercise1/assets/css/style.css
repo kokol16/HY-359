@@ -14,19 +14,21 @@ header {
   font-size: 3rem;
   text-align: left;
 }
-
+kbd {
+  background-color: rgb(26, 79, 100);
+}
 a,
 figcaption {
   color: white;
 }
 
-a:visited,
-a:active {
+.csd-link:visited,
+.csd-link:active {
   color: pink;
 }
 
-a:hover,
-a:link {
+.csd-link:hover,
+.csd-link:link {
   color: rgb(52, 228, 175);
 }
 
@@ -75,8 +77,16 @@ mark {
   color: white;
 }
 
+.navbar-toggler {
+  background-color: rgb(255, 255, 255);
+}
+
 .navbar {
   background-color: rgb(26, 79, 100);
+  font-weight: bold;
+}
+.nav-link {
+  color: white;
 }
 
 #form-card {

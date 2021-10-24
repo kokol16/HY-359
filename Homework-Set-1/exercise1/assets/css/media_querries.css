@@ -1,0 +1,24 @@
+/* Disclaimer: MY site is full responsive without media querries */
+
+@media only screen and (max-width: 2600px) {
+  .fb-share-button {
+    margin-top: 70px;
+  }
+}
+@media only screen and (max-width: 1140px) {
+  .fb-share-button {
+    margin-top: 70px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .fb-share-button {
+    margin-top: 70px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .fb-share-button {
+    margin-top: 10px;
+  }
+}
