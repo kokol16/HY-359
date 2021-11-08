@@ -38,8 +38,9 @@
 
                         <input type="password" class="form-control " id="pswd" placeholder="Enter Password"
                             pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}" required>
-                            
+
                     </div>
+
                     <div class="col-lg-5 col-md-6 col-sm-6 ">
 
                         <input type="password" class="form-control" id="re-pswd" placeholder="Re enter password"
@@ -47,6 +48,15 @@
                     </div>
 
 
+                </div>
+                <div class="form-group row  mt-2">
+                    <div class="col-1"></div>
+                    <p id="pswd-strength" class="d-none"></p>
+                    <div class="form-check form-switch col-lg-5 col-md-6 col-sm-6 ">
+                        <input class="form-check-input show-pass" type="checkbox" id="check-show-pswd">
+
+                        <label class="form-check-label" for="show-pswd">show password</label>
+                    </div>
                 </div>
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-lg-5 col-md-6 col-sm-6 ">
@@ -86,9 +96,9 @@
                         <input type="text" class="form-control" placeholder="Enter City" pattern=".{3,50}" required>
                     </div>
 
-                    <div class="col-lg-5 col-md-6 col-sm-6 ">
+                    <div class="col-lg-5 col-md-6 col-sm-6 " >
 
-                        <input type="text" class="form-control" placeholder="Enter Address" pattern=".{5,50}" required>
+                        <input type="text" class="form-control" id="address" placeholder="Enter Address" pattern=".{5,50}" required>
                     </div>
 
                 </div>
@@ -171,10 +181,18 @@
                     </div>
 
                 </div>
+                <div class="form-group row justify-content-start mt-2 d-none"id="doctor-extra">
+                    <div class="col-6">
+                        <select name="doctor-speciality" id="dc-speciality" required>
+                            <option value="pathologist">pathologist</option>
+                            <option value="General-practitioner">General practitioner</option>
+                        </select>
+                    </div>
 
-
-
-
+                    <div class="col-6">
+                        <textarea class="form-control" id="doctor-text-area" placeholder="Doctor Info"rows="3"></textarea>
+                    </div>
+                </div>
 
 
 
