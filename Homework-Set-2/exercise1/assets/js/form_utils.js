@@ -40,7 +40,7 @@ function check_if_password_is_50_percent_or_higher_with_numbers(password) {
             count_numbers++;
         }
     }
-    if (count_numbers > (pwd_length) / 2) {
+    if (count_numbers >= (pwd_length) / 2) {
         document.getElementById("pswd-strength").innerHTML = "weak password"
         return true
 
@@ -65,7 +65,7 @@ function check_if_a_character_shows_up_more_than_50_percent(password) {
     pwd_length = password.length
     ch_freq = characters_frequency(password)
     for (var key in ch_freq) {
-        if (ch_freq[key] > (pwd_length / 2)) {
+        if (ch_freq[key] >= (pwd_length / 2)) {
             document.getElementById("pswd-strength").innerHTML = "weak password"
             return true
 
@@ -113,15 +113,53 @@ function handle_doctor_radio_button()
 
     }
 }
-function check_amka(amka)
+function on_change(){
+    amka= document.getElementById("amka").value
+    birth_date= document.getElementById("birth-date").value
+    check_amka(amka,birth_date)
+    check_password_strength()
+}
+function on_blur()
 {
+
+    check_if_passwords_equal();
+    
+}
+
+function check_amka(amka,date)
+{
+    if(amka.length==0)
+    {
+        return
+    }
+    var tmp_date=[];
+    date=date.split('-').join('') //cut the - 
+    for(i=0; i< date.length; i=i+2)
+    {
+
+        x=date[i]
+        tmp_date[i]=date[i+1]
+        tmp_date[i+1]=x
+    }
+    date=tmp_date.reverse()
+    
+    for(var i=0; i<6; i++)
+    {
+        if(amka[i]!=date[i])
+        {
+            console.log("wrong amka")
+            $("#submit-button").prop("disabled", true);
+            return
+        }
+    }
+    $("#submit-button").removeAttr('disabled');
+    console.log("valid amka")
 
 }
 $(document).ready(function () {
 
-
-    $("input").blur(check_if_passwords_equal);
-    $("input").change(check_password_strength);
+    $("input").blur(on_blur);
+    $("input").change(on_change);
     $("#check-show-pswd").click(handle_pswd_visibility);
     $("input[name=type-of-user-radio]").click(handle_doctor_radio_button);
  

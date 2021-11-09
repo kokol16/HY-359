@@ -10,12 +10,16 @@
     <meta name="author" content="Georgios Kokolakis">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../assets/js/form_utils.js"></script>
+    <script src="../assets/js/maps_utils.js"></script>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
@@ -77,14 +81,15 @@
 
                     <div class="col-lg-5 col-md-6 col-sm-6 ">
 
-                        <input type="date" class="form-control" value="1980-01-01" min="1920-01-01" max="2005-12-31"
-                            required>
+                        <input type="date" id="birth-date" class="form-control" value="1980-01-01" min="1920-01-01"
+                            max="2005-12-31" required>
 
                     </div>
 
                     <div class="col-lg-5 col-md-6 col-sm-6 ">
 
-                        <input type="text" class="form-control" pattern="[0-9]{11}" placeholder="Enter AMKA" required>
+                        <input type="text" id="amka" class="form-control" pattern="[0-9]{11}" placeholder="Enter AMKA"
+                            required>
                     </div>
 
 
@@ -93,12 +98,14 @@
                 <div class="form-group row justify-content-start mt-2">
                     <div class="col-lg-5 col-md-6 col-sm-6 ">
 
-                        <input type="text" class="form-control" placeholder="Enter City" pattern=".{3,50}" required>
+                        <input type="text" class="form-control" id="city" placeholder="Enter City" pattern=".{3,50}"
+                            required>
                     </div>
 
-                    <div class="col-lg-5 col-md-6 col-sm-6 " >
+                    <div class="col-lg-5 col-md-6 col-sm-6 ">
 
-                        <input type="text" class="form-control" id="address" placeholder="Enter Address" pattern=".{5,50}" required>
+                        <input type="text" class="form-control" id="address" placeholder="Enter Address"
+                            pattern=".{5,50}" required>
                     </div>
 
                 </div>
@@ -181,7 +188,7 @@
                     </div>
 
                 </div>
-                <div class="form-group row justify-content-start mt-2 d-none"id="doctor-extra">
+                <div class="form-group row justify-content-start mt-2 d-none" id="doctor-extra">
                     <div class="col-6">
                         <select name="doctor-speciality" id="dc-speciality" required>
                             <option value="pathologist">pathologist</option>
@@ -190,7 +197,8 @@
                     </div>
 
                     <div class="col-6">
-                        <textarea class="form-control" id="doctor-text-area" placeholder="Doctor Info"rows="3"></textarea>
+                        <textarea class="form-control" id="doctor-text-area" placeholder="Doctor Info"
+                            rows="3"></textarea>
                     </div>
                 </div>
 
@@ -490,14 +498,23 @@
                             </label>
                         </div>
                     </div>
-
+                    <div class="col-lg-6">
+                        <button type="button" id="show-location">Show location</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button type="button" id="find-location">Show my location</button>
+                    </div>
+                    <div id="Map" style="height:300px; width:700px"></div>
+                    <div id="error-map" style="display: none;"></div>
 
 
                 </div>
                 <div class="form-group row justify-content-start mt-2">
-                    <div class="col-lg-4"></div>
                     <div class="col-lg-4">
-                        <button type="submit" class="btn btn-primary">Sign up</button>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="submit" id="submit-button" class="btn btn-primary" disabled>Sign up</button>
                     </div>
 
 
