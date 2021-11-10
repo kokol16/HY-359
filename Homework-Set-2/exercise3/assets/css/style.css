@@ -1,0 +1,30 @@
+button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}
+
+.blinking {
+    animation: blink 5s infinite;
+}
+
+@keyframes blink {
+    0% {
+        background: red;
+    }
+    20% {
+        background: black;
+    }
+    40% {
+        background: yellow;
+    }
+    60% {
+        background: blue;
+    }
+    80% {
+        background: orange;
+    }
+    100% {
+        background: red;
+    }
+}
