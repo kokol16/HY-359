@@ -21,12 +21,18 @@ function check_if_passwords_equal() {
 function handle_pswd_visibility() {
 
     pswd = document.getElementById("pswd")
+    re_pswd = document.getElementById("re-pswd")
+
 
     if ($("#check-show-pswd").is(':checked')) {
         pswd.type = "text"
+        re_pswd.type = "text"
+
     }
     else {
         pswd.type = "password"
+        re_pswd.type = "password"
+
 
 
     }

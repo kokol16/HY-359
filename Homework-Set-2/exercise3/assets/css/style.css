@@ -1,4 +1,4 @@
-button {
+.circle-buttons {
     height: 50px;
     width: 50px;
     border-radius: 50px;
@@ -19,7 +19,7 @@ button {
         background: yellow;
     }
     60% {
-        background: blue;
+        background: purple;
     }
     80% {
         background: orange;

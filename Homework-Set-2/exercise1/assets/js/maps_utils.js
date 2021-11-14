@@ -10,7 +10,7 @@ function find_location_by_lat_lon(lat, lon, callback) {
         }
     });
 
-    xhr.open("GET", "https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse?lat=" + lat + "&lon=" + lon + "&accept-language=en&polygon_threshold=0.0");
+    xhr.open("GET", "https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse?lat=" + lat + "&lon=" + lon + "&format=json&accept-language=en&polygon_threshold=0.0");
     xhr.setRequestHeader("x-rapidapi-host", "forward-reverse-geocoding.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "59dd881c7cmsh891f1f8f669b670p125db3jsn78f61fef5840");
 
@@ -30,21 +30,24 @@ function handle_my_location() {
     }
 }
 function call_back_find_my_location(location_info) {
-    map_info = JSON.parse(location_info.responseText)
-    console.log(map_info)
+    var map_info = JSON.parse(location_info.responseText)
+    $("div.countries select").val(map_info.address.country);
+    $("#address").val(map_info.address.neighbourhood +" "+ map_info.address.postcode);
+    $("#city").val(map_info.address.neighbourhood +" "+ map_info.address.city);
     $("#error-map").hide();
     show_map("#Map", map_info.lat, map_info.lon)
+    
 
 }
 function get_location(location) {
-    lat = location.coords.latitude
-    lon = location.coords.longitude
+    var lat = location.coords.latitude
+    var lon = location.coords.longitude
     find_location_by_lat_lon(lat, lon, call_back_find_my_location)
 }
 function handle_location() {
-    country = $('#country').find(":selected").text();
-    address = $('#address').val();
-    city = $('#city').val();
+    var country = $('#country').find(":selected").text();
+    var address = $('#address').val();
+    var city = $('#city').val();
     show_location(country, address, city)
 }
 
@@ -101,7 +104,7 @@ function check_for_error(map_id, error_id, map_info) {
         return true
 
     }
-    else if (!map_info[0].display_name.includes("Crete")) {
+    else if (!map_info[0].display_name.includes("Crete") && !map_info[0].display_name.includes("Κρήτης")) {
         $(map_id).hide();
         $(error_id).text("Error location isn't in Crete")
         $(error_id).show();
@@ -113,10 +116,8 @@ function show_map(map_id, lat, lon) {
     $(map_id).empty();
     $(map_id).show();
     map = create_map()
-    console.log(lat)
-    console.log(lon)
 
-    place_marker(map, lat, lon, "testttt")
+    place_marker(map, lat, lon, 'home')
     const zoom = 11;
     map.setCenter(position, zoom);
 }
@@ -141,7 +142,7 @@ function place_marker(map, lat, lon, msg) {
 
 }
 function create_map() {
-    map = new OpenLayers.Map("Map");
+    var map = new OpenLayers.Map("Map");
     var mapnik = new OpenLayers.Layer.OSM();
     map.addLayer(mapnik);
     return map
