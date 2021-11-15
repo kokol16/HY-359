@@ -4,7 +4,7 @@ let col = 7;
 //player 1 and player 2
 let game_info =
 {
-    stored_score: [0, 0, 0], //index 0
+    stored_score: [0, 0, 0], //index 0 is draw score, index 1 is player wins, index 2 is player2 wins
     winner: false,
     plays: 1,
     moves_count: 0,
@@ -21,6 +21,13 @@ function play(i, j) {
 
                 update_page(startTime)
                 check_if_bot_turn();
+                if (is_draw()) {
+                    var text = $("#game-text").html();
+                    $("#game-text").html("It's a draw!!<br>" + text)
+                    game_info.stored_score[0]++;
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+                }
                 return true
 
             }

@@ -31,7 +31,8 @@ function handle_my_location() {
 }
 function call_back_find_my_location(location_info) {
     var map_info = JSON.parse(location_info.responseText)
-    $("div.countries select").val(map_info.address.country);
+    console.log(map_info)
+    $("div.countries select").val(map_info.address.country);    
     $("#address").val(map_info.address.neighbourhood +" "+ map_info.address.postcode);
     $("#city").val(map_info.address.neighbourhood +" "+ map_info.address.city);
     $("#error-map").hide();
