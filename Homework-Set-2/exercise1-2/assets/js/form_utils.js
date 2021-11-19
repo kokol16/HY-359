@@ -138,6 +138,7 @@ function check_amka(amka, date) {
     }
     var tmp_date = [];
     date = date.split('-').join('') //cut the - 
+    var x;
     for (i = 0; i < date.length; i = i + 2) {
 
         x = date[i]
