@@ -1,4 +1,6 @@
+/* @Authors George Kokolakis (gkokol@ics.forth.gr) */
 "use strict";
+
 let row = 6;
 let col = 7;
 //player 1 and player 2
@@ -25,6 +27,8 @@ function play(i, j) {
                     var text = $("#game-text").html();
                     $("#game-text").html("It's a draw!!<br>" + text)
                     game_info.stored_score[0]++;
+                    update_score("#game-score")
+
                     google.charts.load('current', { 'packages': ['corechart'] });
                     google.charts.setOnLoadCallback(drawChart);
                 }
@@ -37,6 +41,9 @@ function play(i, j) {
                 game_info.stored_score[game_info.plays]++;
                 google.charts.load('current', { 'packages': ['corechart'] });
                 google.charts.setOnLoadCallback(drawChart);
+                update_score("#game-score")
+
+
 
             }
         }
@@ -82,6 +89,7 @@ function change_turn() {
         game_info.plays = 1
 
     }
+    text += "<br> moves count: " + game_info.moves_count
     return text;
 
 
@@ -253,7 +261,13 @@ function is_draw() {
     }
     return true
 }
+function update_score(id) {
+    var text = "player 1 (blue) wins: " + game_info.stored_score[1] + "<br>"
+    text += "player 2 (green) wins: " + game_info.stored_score[2] + "<br>"
+    text += "Draws: " + game_info.stored_score[0] + "<br>"
+    $(id).html(text)
 
+}
 function new_game() {
 
     game_info.plays = 1
@@ -262,11 +276,9 @@ function new_game() {
     for (var i = 0; i < row; ++i) {
         game_info.moves[i] = [0, 0, 0, 0, 0, 0, 0]
     }
-    var text = "player 1 (blue) wins: " + game_info.stored_score[1] + "<br>"
-    text += "player 2 (green) wins: " + game_info.stored_score[2] + "<br>"
-    text += "Draws: " + game_info.stored_score[0] + "<br>"
 
-    $("#game-text").html(text)
+    update_score("#game-score")
+
     for (var i = 0; i < row; i++) {
 
         for (var j = 0; j < col; ++j) {
@@ -278,7 +290,7 @@ function new_game() {
     }
     startTime = new Date();
     game_info.bot = false
-
+    $("#game-text").html("")
 
 
 }
@@ -327,8 +339,8 @@ function drawChart() {
     chart.draw(data, options);
 }
 function traverse_board_and_apply_function(func_applied) {
-    for (var i = 0; i < row; ++i) {
-        for (var j = 0; j < col; ++j) {
+    for (var j = 0; j < col; ++j) {
+        for (var i = 0; i < row; ++i) {
             if (game_info.moves[i][j] === 0) {
 
                 if (func_applied(i, j))
@@ -360,7 +372,6 @@ function next_move_doesnt_give_win_to_enemy(i, j) {
                 if (game_info.moves[i][j] === 0) {
                     temporary_move(i, j, 1)
                     if (horizontal_win(i, false, 1) || vertical_win(j, false, 1) || diagonial_win(i, j, false, 1)) {
-                        console.log("BAD AI MOVE")
                         undo_move(i, j)
                         undo_move(tmp_i, tmp_j)
                         return false
@@ -386,7 +397,6 @@ function bot_can_block_enemy_win(i, j) {
         temporary_move(i, j, 1)
 
         if (horizontal_win(i, false, 1) || vertical_win(j, false, 1) || diagonial_win(i, j, false, 1)) {
-            console.log("AI BLOCKED YOU SO EZ")
             undo_move(i, j)
             play(i, j)
             return true
@@ -401,7 +411,6 @@ function bot_can_win(i, j) {
         temporary_move(i, j, get_player_turn())
 
         if (horizontal_win(i, false, get_player_turn()) || vertical_win(j, false, get_player_turn()) || diagonial_win(i, j, false, get_player_turn())) {
-            console.log("AI IS OP")
             undo_move(i, j)
             play(i, j)
             return true

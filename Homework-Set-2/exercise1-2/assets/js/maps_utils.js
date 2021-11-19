@@ -1,3 +1,6 @@
+/* @Authors George Kokolakis (gkokol@ics.forth.gr) */
+"use strict";
+
 function find_location_by_lat_lon(lat, lon, callback) {
     const data = null;
 
@@ -32,12 +35,16 @@ function handle_my_location() {
 function call_back_find_my_location(location_info) {
     var map_info = JSON.parse(location_info.responseText)
     console.log(map_info)
-    $("div.countries select").val(map_info.address.country);    
-    $("#address").val(map_info.address.neighbourhood +" "+ map_info.address.postcode);
-    $("#city").val(map_info.address.neighbourhood +" "+ map_info.address.city);
+    $("div.countries select").val(map_info.address.country);
+    var neighbourhood = ""
+    if (map_info.address.neighbourhood) {
+        neighbourhood = map_info.address.neighbourhood
+    }
+    $("#address").val(neighbourhood + " " + map_info.address.postcode);
+    $("#city").val(neighbourhood + " " + map_info.address.city);
     $("#error-map").hide();
     show_map("#Map", map_info.lat, map_info.lon)
-    
+
 
 }
 function get_location(location) {
@@ -67,7 +74,7 @@ function setPosition(lat, lon) {
     return position;
 }
 
-function handler(position, message) {
+function handler(position, message, map) {
     var popup = new OpenLayers.Popup.FramedCloud("Popup",
         position, null,
         message, null,
@@ -78,7 +85,7 @@ function handler(position, message) {
 
 
 function request_maps(address, callback) {
-    data = null
+    var data = null
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
@@ -98,7 +105,6 @@ function request_maps(address, callback) {
 
 function check_for_error(map_id, error_id, map_info) {
     if (jQuery.isEmptyObject(map_info)) {
-        console.log("error")
         $(map_id).hide();
         $(error_id).text("Error can't find the location")
         $(error_id).show();
@@ -116,15 +122,15 @@ function check_for_error(map_id, error_id, map_info) {
 function show_map(map_id, lat, lon) {
     $(map_id).empty();
     $(map_id).show();
-    map = create_map()
+    var map = create_map()
 
-    place_marker(map, lat, lon, 'home')
+    var position = place_marker(map, lat, lon, 'home')
     const zoom = 11;
     map.setCenter(position, zoom);
 }
 function call_back(param) {
 
-    map_info = JSON.parse(param.responseText)
+    var map_info = JSON.parse(param.responseText)
     if (!check_for_error("#Map", "#error-map", map_info)) {
         $("#error-map").hide();
         show_map("#Map", map_info[0].lat, map_info[0].lon)
@@ -134,12 +140,13 @@ function call_back(param) {
 function place_marker(map, lat, lon, msg) {
     var markers = new OpenLayers.Layer.Markers("Markers");
     map.addLayer(markers);
-    position = setPosition(lat, lon)
+    var position = setPosition(lat, lon)
     var mar = new OpenLayers.Marker(position);
     markers.addMarker(mar);
     mar.events.register('mousedown', mar, function (evt) {
-        handler(position, msg);
+        handler(position, msg, map);
     });
+    return position
 
 }
 function create_map() {
