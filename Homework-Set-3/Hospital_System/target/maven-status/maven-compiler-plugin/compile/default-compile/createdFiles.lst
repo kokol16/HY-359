@@ -1,0 +1,15 @@
+database\tables\EditDoctorTable.class
+mainClasses\Doctor.class
+database\tables\EditRandevouzTable.class
+mainClasses\Treatment.class
+database\tables\EditSimpleUserTable.class
+database\tables\EditBloodTestTable.class
+database\init\DB_Connection.class
+mainClasses\Message.class
+mainClasses\User.class
+mainClasses\BloodTest.class
+mainClasses\SimpleUser.class
+database\tables\EditTreatmentTable.class
+mainClasses\Randevouz.class
+database\tables\EditMessageTable.class
+database\init\InitDatabase.class
