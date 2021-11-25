@@ -1,7 +1,9 @@
 database\tables\EditDoctorTable.class
 mainClasses\Doctor.class
 database\tables\EditRandevouzTable.class
+check_email.class
 mainClasses\Treatment.class
+check_amka.class
 database\tables\EditSimpleUserTable.class
 register.class
 database\tables\EditBloodTestTable.class

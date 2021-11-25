@@ -169,6 +169,10 @@ $(document).ready(function () {
 
     $("input").change(on_change);
     $("#username").change(check_if_username_exists);
+    $("#email").change(check_if_email_exists);
+    $("#amka").change(check_if_amka_exists);
+
+
 
     $("#check-show-pswd").click(handle_pswd_visibility);
     $("input[name=type-of-user-radio]").click(handle_doctor_radio_button);
@@ -177,7 +181,11 @@ $(document).ready(function () {
 })
 function callback_register(response)
 {
-    console.log(response)
+
+    $("#error").html(remove_str($("#error").html(), " register error"))
+    $("#page-container").addClass("d-none")
+    $("#after_register").html("register successful<br>" + response)
+
 }
 let url = "http://localhost:8080/Hospital_System/"
 
@@ -226,10 +234,17 @@ function send_form_to_server() {
         doctor_info: doctor_info
 
     };
-    console.log(data)
-    sendXmlPostRequest(register_url, data, callback_register);
+    sendXmlPostRequest(register_url, data, callback_register, call_back_error_register);
     return false
 
+}
+function check_if_amka_exists()
+{
+    var check_amka_url = url + "check_amka"
+    var amka = $("#amka").val()
+    var data = {amka: amka}
+    console.log(data)
+    sendXmlPostRequest(check_amka_url, data, call_back_check_amka, call_back_error_amka);
 }
 
 function check_if_username_exists()
@@ -238,9 +253,62 @@ function check_if_username_exists()
     var user_name = $("#username").val()
     var data = {username: user_name}
     console.log(data)
-    sendXmlPostRequest(check_username_url, data, call_back_check_username);
+    sendXmlPostRequest(check_username_url, data, call_back_check_username, call_back_error_username);
 }
+function check_if_email_exists()
+{
+    var check_email_url = url + "check_email"
+    var email = $("#email").val()
+    var data = {email: email}
+    console.log(data)
+    sendXmlPostRequest(check_email_url, data, call_back_check_email, call_back_error_email);
+}
+function call_back_check_email(response)
+{
+    $("#error").html(remove_str($("#error").html(), " email already exists"))
+
+    console.log(response)
+}
+function call_back_check_amka(response)
+{
+    $("#error").html(remove_str($("#error").html(), " Amka already exists"))
+
+    console.log(response)
+}
+
 function call_back_check_username(response)
 {
+    $("#error").html(remove_str($("#error").html(), " username already exists"))
+
     console.log(response)
+}
+function call_back_error_username()
+{
+    var text = $("#error").html()
+    if (!text.includes(" username already exists"))
+        $("#error").html(text + " username already exists");
+}
+function call_back_error_email()
+{
+    var text = $("#error").html()
+    if (!text.includes(" email already exists"))
+        $("#error").html(text + " email already exists");
+}
+function call_back_error_amka()
+{
+    var text = $("#error").html()
+    if (!text.includes(" Amka already exists"))
+        $("#error").html(text + " Amka already exists");
+}
+
+function call_back_error_register()
+{
+    var text = $("#error").html()
+    if (!text.includes(" register error"))
+        $("#error").html(text + " register error");
+}
+function remove_str(str, to_remove)
+{
+    var ret = str.replace(to_remove, ' ');
+    return ret;
 }

@@ -5,7 +5,7 @@
  */
 
 
-function sendXmlPostRequest(url, data, callback) {
+function sendXmlPostRequest(url, data, callback,error_callback) {
   var request = new XMLHttpRequest();
   request.open("POST", url, true);
 
@@ -14,6 +14,9 @@ function sendXmlPostRequest(url, data, callback) {
     if (this.readyState === 4 && this.status === 200) {
       callback(request.response);
     }
+        else if (this.status !== 200){
+            error_callback()
+        }
   };
   request.send(JSON.stringify(data));
 }

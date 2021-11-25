@@ -5,6 +5,7 @@
  */
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import database.tables.EditDoctorTable;
@@ -40,12 +41,15 @@ public class register extends HttpServlet {
         Utils utils = new Utils();
         String json_str = utils.getJSONFromAjax(request.getReader());
         JsonObject user_json = JsonParser.parseString(json_str).getAsJsonObject();
-        if (user_json.get("specialty") == null) {
+        JsonElement specialty = user_json.get("specialty");
+        if (specialty.isJsonNull()) {
 
             EditSimpleUserTable simple_user_obj = new EditSimpleUserTable();
             try {
                 System.out.println(json_str);
                 simple_user_obj.addSimpleUserFromJSON(json_str);
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().write(json_str);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
@@ -55,6 +59,8 @@ public class register extends HttpServlet {
             EditDoctorTable doctor_edit_obj = new EditDoctorTable();
             try {
                 doctor_edit_obj.addDoctorFromJSON(json_str);
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().write(json_str);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);

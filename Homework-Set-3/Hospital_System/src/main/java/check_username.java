@@ -61,6 +61,7 @@ public class check_username extends HttpServlet {
         String username = username_json.get("username").getAsString();
         try {
             if (username_exists(username)) {
+                response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
                 System.out.println("username exists");
             } else {
                 System.out.println("username doesn't exists");
@@ -86,14 +87,19 @@ public class check_username extends HttpServlet {
     public boolean username_exists(String username) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-
-        ResultSet rs, rs2;
+        ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "'");
-            stmt.close();
-            stmt = con.createStatement();
-            rs2 = stmt.executeQuery("SELECT * FROM doctors WHERE username = '" + username + "'");
-            if (rs.isBeforeFirst() == false && rs2.isBeforeFirst() == false) {
+            if (!rs.isBeforeFirst()) {
+                while (rs != null && rs.next()) {
+
+                }
+            } else {
+                return true;
+            }
+
+            rs = stmt.executeQuery("SELECT * FROM doctors WHERE username = '" + username + "'");
+            if (!rs.isBeforeFirst()) {
                 return false;
             }
 
@@ -102,7 +108,6 @@ public class check_username extends HttpServlet {
             System.err.println(e.getMessage());
         }
         stmt.close();
-        con.close();
 
         return true;
 

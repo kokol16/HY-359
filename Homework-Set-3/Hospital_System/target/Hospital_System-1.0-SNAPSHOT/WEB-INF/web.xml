@@ -12,6 +12,14 @@
         <servlet-name>check_username</servlet-name>
         <servlet-class>check_username</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>check_email</servlet-name>
+        <servlet-class>check_email</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>check_amka</servlet-name>
+        <servlet-class>check_amka</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>check_username</servlet-name>
         <url-pattern>/check_username</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>check_email</servlet-name>
+        <url-pattern>/check_email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>check_amka</servlet-name>
+        <url-pattern>/check_amka</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
