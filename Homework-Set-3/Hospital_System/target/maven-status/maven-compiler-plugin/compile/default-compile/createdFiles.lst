@@ -3,11 +3,15 @@ mainClasses\Doctor.class
 database\tables\EditRandevouzTable.class
 mainClasses\Treatment.class
 database\tables\EditSimpleUserTable.class
+register.class
 database\tables\EditBloodTestTable.class
 database\init\DB_Connection.class
 mainClasses\Message.class
 mainClasses\User.class
+mainClasses\Utils.class
+check_username.class
 mainClasses\BloodTest.class
+test.class
 mainClasses\SimpleUser.class
 database\tables\EditTreatmentTable.class
 mainClasses\Randevouz.class

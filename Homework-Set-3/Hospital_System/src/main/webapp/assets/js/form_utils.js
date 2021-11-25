@@ -159,7 +159,7 @@ function check_amka(amka, date) {
             return
         }
     }
-   // $("#submit-button").removeAttr('disabled');
+    // $("#submit-button").removeAttr('disabled');
     console.log("valid amka")
 
 }
@@ -168,22 +168,26 @@ let blood_type = null
 $(document).ready(function () {
 
     $("input").change(on_change);
+    $("#username").change(check_if_username_exists);
+
     $("#check-show-pswd").click(handle_pswd_visibility);
     $("input[name=type-of-user-radio]").click(handle_doctor_radio_button);
-    $('#blood-type a').on('click', function () {
-        blood_type = ($(this).text());
-        console.log(blood_type)
-    });
+
 
 })
 function callback_register(response)
 {
     console.log(response)
 }
-let url = "http://localhost:8080/Hospital/register"
+let url = "http://localhost:8080/Hospital_System/"
 
 function send_form_to_server() {
+    var speciality = null;
+    var doctor_info = null;
+    var register_url = url + "register"
     if ($('#doctor-radio').is(':checked')) {
+        speciality = $("#dc-speciality").val()
+        doctor_info = $("#doctor-text-area").val()
 
     }
     var gender
@@ -211,17 +215,32 @@ function send_form_to_server() {
         country: $("#country").val(),
         city: $("#city").val(),
         address: $("#address").val(),
-        lat: lat,
-        lon: lon,
+        lat: 1,
+        lon: 2,
         telephone: $("#telephone").val(),
         height: $("#height").val(),
         weight: $("#weight").val(),
         blooddonor: blood_donor,
-        bloodtype: blood_type
+        bloodtype: $("#blood-type").val(),
+        specialty: speciality,
+        doctor_info: doctor_info
 
     };
     console.log(data)
-    sendXmlPostRequest(url, JSON.stringify(data), callback_register);
+    sendXmlPostRequest(register_url, data, callback_register);
     return false
 
+}
+
+function check_if_username_exists()
+{
+    var check_username_url = url + "check_username"
+    var user_name = $("#username").val()
+    var data = {username: user_name}
+    console.log(data)
+    sendXmlPostRequest(check_username_url, data, call_back_check_username);
+}
+function call_back_check_username(response)
+{
+    console.log(response)
 }

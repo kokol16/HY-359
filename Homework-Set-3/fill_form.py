@@ -23,6 +23,7 @@ url = 'http://localhost:8080/Hospital_System/'
 chromedriver = "C:\chromedriver.exe"
 ser = Service(chromedriver)
 op = webdriver.ChromeOptions()
+
 driver = webdriver.Chrome(service=ser, options=op)
 driver.maximize_window()
 
@@ -42,8 +43,13 @@ driver.find_element(By.ID, 'address').send_keys(address)
 driver.find_element(By.ID, 'agree-with-terms').click()
 driver.find_element(By.ID, 'man').click()
 driver.find_element(By.ID, 'default-radio').click()
+driver.find_element(By.ID, 'blood-giver').click()
+your_choice=driver.find_element(By.XPATH ,"//select/option[@value='0+']")
+your_choice.click()
+
+
 #driver.find_element(By.ID, 'a-blood').click()
-time.sleep(5)
+time.sleep(3)
 element = driver.find_element(By.ID, 'submit-buttonn').click()
 
 

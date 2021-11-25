@@ -23,42 +23,39 @@ import mainClasses.Randevouz;
  */
 public class EditSimpleUserTable {
 
- 
-    public void addSimpleUserFromJSON(String json) throws ClassNotFoundException{
-         SimpleUser user=jsonToSimpleUser(json);
-         addNewSimpleUser(user);
+    public void addSimpleUserFromJSON(String json) throws ClassNotFoundException {
+        SimpleUser user = jsonToSimpleUser(json);
+        addNewSimpleUser(user);
     }
-    
-     public SimpleUser jsonToSimpleUser(String json){
-         Gson gson = new Gson();
+
+    public SimpleUser jsonToSimpleUser(String json) {
+        Gson gson = new Gson();
 
         SimpleUser user = gson.fromJson(json, SimpleUser.class);
         return user;
     }
-    
-    public String simpleUserToJSON(SimpleUser user){
-         Gson gson = new Gson();
+
+    public String simpleUserToJSON(SimpleUser user) {
+        Gson gson = new Gson();
 
         String json = gson.toJson(user, SimpleUser.class);
         return json;
     }
-    
-   
-    
-    public void updateSimpleUser(String username,double weight) throws SQLException, ClassNotFoundException{
+
+    public void updateSimpleUser(String username, double weight) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String update="UPDATE users SET weight='"+weight+"' WHERE username = '"+username+"'";
+        String update = "UPDATE users SET weight='" + weight + "' WHERE username = '" + username + "'";
         stmt.executeUpdate(update);
     }
-    
-    public void printSimpleUserDetails(String username, String password) throws SQLException, ClassNotFoundException{
-         Connection con = DB_Connection.getConnection();
+
+    public void printSimpleUserDetails(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password='"+password+"'");
+            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password='" + password + "'");
             while (rs.next()) {
                 System.out.println("===Result===");
                 DB_Connection.printResults(rs);
@@ -69,16 +66,16 @@ public class EditSimpleUserTable {
             System.err.println(e.getMessage());
         }
     }
-    
-    public SimpleUser databaseToSimpleUser(String username, String password) throws SQLException, ClassNotFoundException{
-         Connection con = DB_Connection.getConnection();
+
+    public SimpleUser databaseToSimpleUser(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password='"+password+"'");
+            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password='" + password + "'");
             rs.next();
-            String json=DB_Connection.getResultsToJSON(rs);
+            String json = DB_Connection.getResultsToJSON(rs);
             Gson gson = new Gson();
             SimpleUser user = gson.fromJson(json, SimpleUser.class);
             return user;
@@ -88,16 +85,16 @@ public class EditSimpleUserTable {
         }
         return null;
     }
-    
-    public String databaseUserToJSON(String username, String password) throws SQLException, ClassNotFoundException{
-         Connection con = DB_Connection.getConnection();
+
+    public String databaseUserToJSON(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password='"+password+"'");
+            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND password='" + password + "'");
             rs.next();
-            String json=DB_Connection.getResultsToJSON(rs);
+            String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
@@ -106,8 +103,7 @@ public class EditSimpleUserTable {
         return null;
     }
 
-
-     public void createSimpleUserTable() throws SQLException, ClassNotFoundException {
+    public void createSimpleUserTable() throws SQLException, ClassNotFoundException {
 
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -136,8 +132,7 @@ public class EditSimpleUserTable {
         stmt.execute(query);
         stmt.close();
     }
-    
-    
+
     /**
      * Establish a database connection and add in the database.
      *
@@ -145,9 +140,6 @@ public class EditSimpleUserTable {
      */
     public void addNewSimpleUser(SimpleUser user) throws ClassNotFoundException {
         try {
-            Connection con = DB_Connection.getConnection();
-
-            Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO "
                     + " users (username,email,password,firstname,lastname,birthdate,gender,amka,country,city,address,"
@@ -174,6 +166,9 @@ public class EditSimpleUserTable {
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
+            Connection con = DB_Connection.getConnection();
+
+            Statement stmt = con.createStatement();
             stmt.executeUpdate(insertQuery);
             System.out.println("# The user was successfully added in the database.");
 
@@ -184,7 +179,5 @@ public class EditSimpleUserTable {
             Logger.getLogger(EditSimpleUserTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-   
 
 }
