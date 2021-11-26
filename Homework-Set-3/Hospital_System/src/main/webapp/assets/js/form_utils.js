@@ -2,8 +2,11 @@
 "use strict";
 
 let isPopoverEnabled = false
-let lat = null
-let lon = null
+let lat = 0
+let lon = 0
+let valid_email = true;
+let valid_username = true;
+let valid_amka = true;
 function check_if_passwords_equal() {
     var pswd = $("#pswd").val();
 
@@ -139,6 +142,7 @@ function on_change() {
 
 function check_amka(amka, date) {
     if (amka.length == 0) {
+        valid_amka = false
         return
     }
     var tmp_date = [];
@@ -154,6 +158,8 @@ function check_amka(amka, date) {
 
     for (var i = 0; i < 6; i++) {
         if (amka[i] != date[i]) {
+            valid_amka = false
+
             console.log("wrong amka")
             //$("#submit-button").prop("disabled", true);
             return
@@ -161,6 +167,7 @@ function check_amka(amka, date) {
     }
     // $("#submit-button").removeAttr('disabled');
     console.log("valid amka")
+    valid_amka = true;
 
 }
 let blood_type = null
@@ -190,6 +197,13 @@ function callback_register(response)
 let url = "http://localhost:8080/Hospital_System/"
 
 function send_form_to_server() {
+    /*
+    if (!valid_amka || !valid_email || !valid_username)
+    {
+                console.log("not valid form informations")
+                return
+
+    }*/
     var speciality = null;
     var doctor_info = null;
     var register_url = url + "register"
@@ -223,8 +237,8 @@ function send_form_to_server() {
         country: $("#country").val(),
         city: $("#city").val(),
         address: $("#address").val(),
-        lat: 1,
-        lon: 2,
+        lat: lat,
+        lon: lon,
         telephone: $("#telephone").val(),
         height: $("#height").val(),
         weight: $("#weight").val(),
@@ -285,18 +299,21 @@ function call_back_check_username(response)
 function call_back_error_username()
 {
     var text = $("#error").html()
+    valid_username = false
     if (!text.includes(" username already exists"))
         $("#error").html(text + " username already exists");
 }
 function call_back_error_email()
 {
     var text = $("#error").html()
+    valid_email = false
     if (!text.includes(" email already exists"))
         $("#error").html(text + " email already exists");
 }
 function call_back_error_amka()
 {
     var text = $("#error").html()
+    valid_amka = false
     if (!text.includes(" Amka already exists"))
         $("#error").html(text + " Amka already exists");
 }

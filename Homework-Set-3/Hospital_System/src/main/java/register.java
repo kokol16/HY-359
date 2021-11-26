@@ -48,8 +48,7 @@ public class register extends HttpServlet {
             try {
                 System.out.println(json_str);
                 simple_user_obj.addSimpleUserFromJSON(json_str);
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write(json_str);
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
@@ -59,14 +58,14 @@ public class register extends HttpServlet {
             EditDoctorTable doctor_edit_obj = new EditDoctorTable();
             try {
                 doctor_edit_obj.addDoctorFromJSON(json_str);
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write(json_str);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
                 response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
 
             }
         }
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().write(json_str);
 
     }
 
