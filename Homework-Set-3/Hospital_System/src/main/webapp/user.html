@@ -36,7 +36,7 @@
                     <div class="form-group row justify-content-start mt-2 ">
                         <div class="col-lg-5 col-md-6 col-sm-6  ">
                             <input type="text" id="username" class="form-control" placeholder="Enter username" pattern="[a-z A-Z]{8,}"
-                                   required>
+                                   disabled>
                         </div>
                         <div class="col-lg-5 col-md-6 col-sm-6">
 
@@ -51,11 +51,7 @@
 
                         </div>
 
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
 
-                            <input type="password" class="form-control" id="re-pswd" placeholder="Re enter password"
-                                   pattern="(?=.*[0-9])(?=.*[a-z-A-Z])(?=.*[@$!%*#?&]).{8,}" required>
-                        </div>
 
 
                     </div>
@@ -95,7 +91,7 @@
                         <div class="col-lg-5 col-md-6 col-sm-6 ">
 
                             <input type="text" id="amka" class="form-control" pattern="[0-9]{11}" placeholder="Enter AMKA"
-                                   required>
+                                   disabled>
                         </div>
 
 
@@ -467,7 +463,7 @@
 
                         </div>
                         <div class="col-lg-4">
-                            <button type="button" id="submit-buttonn"     onclick="  send_form_to_server(); return false;" >Sign up</button>
+                            <button type="button" id="submit-buttonn"     onclick="  update_data(); return false;" >Apply</button>
                         </div>
 
 
