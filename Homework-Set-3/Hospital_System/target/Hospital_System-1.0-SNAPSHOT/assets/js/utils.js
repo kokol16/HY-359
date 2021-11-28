@@ -34,3 +34,15 @@ function get_user_form_data()
     return data;
 
 }
+
+
+function get_gender()
+{
+    var gender
+    if ($('#man').is(':checked')) {
+        gender = "male"
+    } else {
+        gender = "female"
+    }
+    return gender
+}

@@ -106,11 +106,14 @@ function calculate_and_display_bmi()
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-            console.log(this.responseText);
+            var json = JSON.parse(this.responseText)
+            $("#bmi-text").html("you have " + json.data.health + " BMI!")
         }
     });
+    var weight = $("#weight").val()
+    var height = $("#height").val()
 
-    xhr.open("GET", "https://fitness-calculator.p.rapidapi.com/bmi?age=25&weight=65&height=180");
+    xhr.open("GET", "https://fitness-calculator.p.rapidapi.com/bmi?age=25&weight=" + weight + "&height=" + height);
     xhr.setRequestHeader("x-rapidapi-host", "fitness-calculator.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "59dd881c7cmsh891f1f8f669b670p125db3jsn78f61fef5840");
 
@@ -118,5 +121,24 @@ function calculate_and_display_bmi()
 }
 
 function calculate_and_display_ideal_weight() {
+    const data = null;
 
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var json = JSON.parse(this.responseText)
+            $("#ideal-weight-text").html("ideal weight is " + json.data.Devine + " kg")
+        }
+    });
+    var gender = get_gender();
+    var height = $("#height").val()
+
+
+    xhr.open("GET", "https://fitness-calculator.p.rapidapi.com/idealweight?gender=" + gender + "&height=" + height);
+    xhr.setRequestHeader("x-rapidapi-host", "fitness-calculator.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "59dd881c7cmsh891f1f8f669b670p125db3jsn78f61fef5840");
+
+    xhr.send(data);
 }

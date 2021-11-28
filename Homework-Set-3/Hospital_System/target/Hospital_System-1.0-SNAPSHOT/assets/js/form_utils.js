@@ -212,12 +212,7 @@ function send_form_to_server() {
         doctor_info = $("#doctor-text-area").val()
 
     }
-    var gender
-    if ($('#man').is(':checked')) {
-        gender = "male"
-    } else {
-        gender = "female"
-    }
+    var gender = get_gender();
     var blood_donor
     if ($('#blood-giver').is(':checked')) {
         blood_donor = 1

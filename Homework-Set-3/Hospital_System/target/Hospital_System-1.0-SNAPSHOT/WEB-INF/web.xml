@@ -32,6 +32,10 @@
         <servlet-name>user</servlet-name>
         <servlet-class>user</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>certified_doctors</servlet-name>
+        <servlet-class>certified_doctors</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>user</servlet-name>
         <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>certified_doctors</servlet-name>
+        <url-pattern>/certified_doctors</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
