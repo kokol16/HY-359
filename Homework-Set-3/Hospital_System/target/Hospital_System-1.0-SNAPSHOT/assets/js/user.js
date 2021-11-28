@@ -12,16 +12,22 @@ function update_data() {
     } else {
         blood_donor = 0
     }
+
+
     var data = {
+        username: $("#username").val(),
         email: $("#email").val(),
         password: $("#pswd").val(),
         firstname: $("#firstname").val(),
         lastname: $("#surname").val(),
         birthdate: $("#birth-date").val(),
         gender: gender,
+        amka: $("#amka").val(),
         country: $("#country").val(),
         city: $("#city").val(),
         address: $("#address").val(),
+        lat: lat,
+        lon: lon,
         telephone: $("#telephone").val(),
         height: $("#height").val(),
         weight: $("#weight").val(),
@@ -29,10 +35,17 @@ function update_data() {
         bloodtype: $("#blood-type").val(),
 
     };
-    sendXmlPostRequest(register_url, data, callback_register, call_back_error_register);
+    console.log(data)
+    sendXmlPostRequest("/Hospital_System/user", data, call_back_update_data, call_back_error_update_data);
     return false
 }
-
+function call_back_update_data(response)
+{
+    console.log(response)
+}
+function call_back_error_update_data()
+{
+}
 function fill_user_info(responseData) {
     console.log(responseData)
 
@@ -79,4 +92,31 @@ function get_data() {
 }
 $(document).ready(function () {
     get_data();
+    $("#bmi").click(calculate_and_display_bmi)
+    $("#ideal-weight").click(calculate_and_display_ideal_weight)
+
 });
+
+function calculate_and_display_bmi()
+{
+    const data = null;
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            console.log(this.responseText);
+        }
+    });
+
+    xhr.open("GET", "https://fitness-calculator.p.rapidapi.com/bmi?age=25&weight=65&height=180");
+    xhr.setRequestHeader("x-rapidapi-host", "fitness-calculator.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "59dd881c7cmsh891f1f8f669b670p125db3jsn78f61fef5840");
+
+    xhr.send(data);
+}
+
+function calculate_and_display_ideal_weight() {
+
+}

@@ -198,12 +198,12 @@ let url = "http://localhost:8080/Hospital_System/"
 
 function send_form_to_server() {
     /*
-    if (!valid_amka || !valid_email || !valid_username)
-    {
-                console.log("not valid form informations")
-                return
-
-    }*/
+     if (!valid_amka || !valid_email || !valid_username)
+     {
+     console.log("not valid form informations")
+     return
+     
+     }*/
     var speciality = null;
     var doctor_info = null;
     var register_url = url + "register"
@@ -225,29 +225,7 @@ function send_form_to_server() {
         blood_donor = 0
     }
 
-    var data = {
-        username: $("#username").val(),
-        email: $("#email").val(),
-        password: $("#pswd").val(),
-        firstname: $("#firstname").val(),
-        lastname: $("#surname").val(),
-        birthdate: $("#birth-date").val(),
-        gender: gender,
-        amka: $("#amka").val(),
-        country: $("#country").val(),
-        city: $("#city").val(),
-        address: $("#address").val(),
-        lat: lat,
-        lon: lon,
-        telephone: $("#telephone").val(),
-        height: $("#height").val(),
-        weight: $("#weight").val(),
-        blooddonor: blood_donor,
-        bloodtype: $("#blood-type").val(),
-        specialty: speciality,
-        doctor_info: doctor_info
-
-    };
+    var data = get_user_form_data()
     sendXmlPostRequest(register_url, data, callback_register, call_back_error_register);
     return false
 

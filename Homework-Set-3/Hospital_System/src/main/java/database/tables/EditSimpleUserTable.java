@@ -180,4 +180,38 @@ public class EditSimpleUserTable {
         }
     }
 
+    public void updateUser(SimpleUser user) throws SQLException, ClassNotFoundException {
+        try {
+            String insertQuery = "UPDATE users SET  "
+                    + " email='" + user.getEmail() + "',"
+                    + "password='" + user.getPassword() + "',"
+                    + "firstname='" + user.getFirstname() + "',"
+                    + "lastname='" + user.getLastname() + "',"
+                    + "birthdate='" + user.getBirthdate() + "',"
+                    + "gender='" + user.getGender() + "',"
+                    + "country='" + user.getCountry() + "',"
+                    + "city='" + user.getCity() + "',"
+                    + "address='" + user.getAddress() + "',"
+                    + "lat='" + user.getLat() + "',"
+                    + "lon='" + user.getLon() + "',"
+                    + "telephone='" + user.getTelephone() + "',"
+                    + "height='" + user.getHeight() + "',"
+                    + "weight='" + user.getWeight() + "',"
+                    + "blooddonor='" + user.isBloodDonor() + "',"
+                    + "bloodtype='" + user.getBloodtype() + "'"
+                    + " WHERE username=\"" + user.getUsername() + "\"";
+            //stmt.execute(table);
+            System.out.println(insertQuery);
+            Connection con = DB_Connection.getConnection();
+
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(insertQuery);
+            System.out.println("# The user was successfully added in the database.");
+
+            /* Get the member id from the database and set it to the member */
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditSimpleUserTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

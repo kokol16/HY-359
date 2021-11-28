@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import database.tables.EditDoctorTable;
 import database.tables.EditSimpleUserTable;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import mainClasses.SimpleUser;
+import mainClasses.Utils;
 
 /**
  *
@@ -68,6 +74,25 @@ public class user extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Utils utils = new Utils();
+        String json_str = utils.getJSONFromAjax(request.getReader());
+        EditSimpleUserTable simple_user_obj = new EditSimpleUserTable();
+        SimpleUser user = simple_user_obj.jsonToSimpleUser(json_str);
+        try {
+            simple_user_obj.updateUser(user);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+            response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(user.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
+
+        response.getWriter().write(json_str);
     }
 
     /**
