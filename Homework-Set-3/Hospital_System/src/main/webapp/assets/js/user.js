@@ -142,3 +142,48 @@ function calculate_and_display_ideal_weight() {
 
     xhr.send(data);
 }
+
+function get_certified_doctors()
+{
+    const data = null;
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var json = JSON.parse(this.responseText)
+            load_doc_data_to_table(json);
+        }
+    });
+
+    xhr.open('GET', 'certified_doctors', true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(data);
+}
+function load_doc_data_to_table(json)
+{
+    var table = document.getElementById('cert-doc-table');
+    var total = json.length;
+    var cell = new Array();
+    for (var i = 0; i < total; i++) {
+        row = table.insertRow(i + 1);
+        for (var j = 0; j < 8; j++) {
+            cell[j] = row.insertCell(j);
+        }
+        cell[0].innerHTML = json[i].firstname;
+        cell[1].innerHTML = json[i].lastname;
+        cell[2].innerHTML = json[i].email;
+        cell[3].innerHTML = json[i].telephone;
+        cell[4].innerHTML = json[i].address;
+        cell[5].innerHTML = json[i].city;
+        cell[6].innerHTML = json[i].doctor_info;
+        cell[7].innerHTML = json[i].specialty;
+
+
+
+
+
+
+    }
+}

@@ -1,12 +1,12 @@
 /* @Authors George Kokolakis (gkokol@ics.forth.gr) */
 "use strict";
 
-let isPopoverEnabled = false
-let lat = 0
-let lon = 0
-let valid_email = true;
-let valid_username = true;
-let valid_amka = true;
+var  isPopoverEnabled = false
+var  lat = 0
+var  lon = 0
+var  valid_email = true;
+var  valid_username = true;
+var  valid_amka = true;
 function check_if_passwords_equal() {
     var pswd = $("#pswd").val();
 
@@ -170,7 +170,7 @@ function check_amka(amka, date) {
     valid_amka = true;
 
 }
-let blood_type = null
+var blood_type = null
 
 $(document).ready(function () {
 
@@ -194,7 +194,7 @@ function callback_register(response)
     $("#after_register").html("register successful<br>" + response)
 
 }
-let url = "http://localhost:8080/Hospital_System/"
+var url = "http://localhost:8080/Hospital_System/"
 
 function send_form_to_server() {
     /*

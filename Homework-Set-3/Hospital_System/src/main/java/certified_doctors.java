@@ -40,13 +40,16 @@ public class certified_doctors extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        JsonArray json_array = new JsonArray();
         EditDoctorTable doctor_utils = new EditDoctorTable();
         try {
-            
+
             ArrayList<Doctor> doctors = doctor_utils.databaseToDoctors();
             for (Doctor doc : doctors) {
                 if (doc.getCertified() == 1) {
                     String json_str = doctor_utils.doctorToJSON(doc);
+                    JsonObject user_json = JsonParser.parseString(json_str).getAsJsonObject();
+                    json_array.add(user_json);
 
                 }
             }
@@ -56,6 +59,9 @@ public class certified_doctors extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(certified_doctors.class.getName()).log(Level.SEVERE, null, ex);
         }
+        response.setStatus(HttpServletResponse.SC_OK);
+
+        response.getWriter().write(json_array.toString());
     }
 
     /**

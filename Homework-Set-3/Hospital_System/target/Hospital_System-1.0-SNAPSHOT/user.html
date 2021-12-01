@@ -489,7 +489,28 @@
 
     <!-- certified doctors section -->
     <div class="container-fluid " >      
-        <button type="button" id="cert-docs">show certified doctors</button>
+        <button type="button" onclick="get_certified_doctors();" id="cert-docs">show certified doctors</button>
+        <table  class="table table-dark" id="cert-doc-table">
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>address</th>
+                <th>city</th>
+                <th>info</th>
+                <th>specialty</th>
+
+
+
+
+
+
+            </tr>
+
+
+        </table>
+        <div id="display_docs"></div>
     </div> 
 
 </body>
