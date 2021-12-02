@@ -28,6 +28,7 @@ driver = webdriver.Chrome(service=ser, options=op)
 driver.maximize_window()
 
 driver.get(url)
+driver.find_element(By.ID, 'register-but').click()
 driver.find_element(By.ID, 'username').send_keys(username)
 driver.find_element(By.ID, 'email').send_keys(email)
 driver.find_element(By.ID, 'pswd').send_keys(pswd)

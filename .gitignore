@@ -17,3 +17,8 @@ bin-release/
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
 
+/Homework-Set-3/Personalized-Health/target/
+/Homework-Set-3/WebApplication1/nbproject/private/
+/Homework-Set-3/Personalized-Health/nbproject/private/
+/Homework-Set-3/Personalized-Health/dist/
+/Homework-Set-3/Personalized-Health/build/

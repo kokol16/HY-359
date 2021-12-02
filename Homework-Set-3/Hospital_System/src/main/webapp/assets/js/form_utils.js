@@ -1,12 +1,12 @@
 /* @Authors George Kokolakis (gkokol@ics.forth.gr) */
 "use strict";
 
-var  isPopoverEnabled = false
-var  lat = 0
-var  lon = 0
-var  valid_email = true;
-var  valid_username = true;
-var  valid_amka = true;
+var isPopoverEnabled = false
+var lat = 0
+var lon = 0
+var valid_email = true;
+var valid_username = true;
+var valid_amka = true;
 function check_if_passwords_equal() {
     var pswd = $("#pswd").val();
 
@@ -207,18 +207,8 @@ function send_form_to_server() {
     var speciality = null;
     var doctor_info = null;
     var register_url = url + "register"
-    if ($('#doctor-radio').is(':checked')) {
-        speciality = $("#dc-speciality").val()
-        doctor_info = $("#doctor-text-area").val()
-
-    }
-    var gender = get_gender();
-    var blood_donor
-    if ($('#blood-giver').is(':checked')) {
-        blood_donor = 1
-    } else {
-        blood_donor = 0
-    }
+ 
+   
 
     var data = get_user_form_data()
     sendXmlPostRequest(register_url, data, callback_register, call_back_error_register);

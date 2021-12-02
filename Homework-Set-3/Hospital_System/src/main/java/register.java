@@ -40,13 +40,17 @@ public class register extends HttpServlet {
 
         Utils utils = new Utils();
         String json_str = utils.getJSONFromAjax(request.getReader());
+        System.out.println(json_str);
         JsonObject user_json = JsonParser.parseString(json_str).getAsJsonObject();
         JsonElement specialty = user_json.get("specialty");
+        json_str = eliminate_special_characters(json_str);
+
         if (specialty.isJsonNull()) {
 
             EditSimpleUserTable simple_user_obj = new EditSimpleUserTable();
             try {
                 System.out.println(json_str);
+
                 simple_user_obj.addSimpleUserFromJSON(json_str);
 
             } catch (ClassNotFoundException ex) {
@@ -69,8 +73,51 @@ public class register extends HttpServlet {
 
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private static boolean hasSpecialChars(String input) {
+        boolean flag = false;
+        if ((input != null) && (input.length() > 0)) {
+            char c;
+            for (int i = 0; i < input.length(); i++) {
+                c = input.charAt(i);
+                switch (c) {
+                case '<':
+                    flag = true;
+                    break;
+                case '>':
+                    flag = true;
+                    break;
+                case '&':
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return (flag);
     }
+
+    private static String eliminate_special_characters(String input) {
+        if (!hasSpecialChars(input)) {
+            return (input);
+        }
+        StringBuffer filtered = new StringBuffer(input.length());
+        char c;
+        for (int i = 0; i < input.length(); i++) {
+            c = input.charAt(i);
+            switch (c) {
+            case '<':
+                filtered.append("&lt;");
+                break;
+            case '>':
+                filtered.append("&gt;");
+                break;
+            case '&':
+                filtered.append("&amp;");
+                break;
+            default:
+                filtered.append(c);
+            }
+        }
+        return (filtered.toString());
+    }
+
 }

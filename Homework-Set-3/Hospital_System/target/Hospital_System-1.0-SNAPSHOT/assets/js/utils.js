@@ -15,7 +15,7 @@ function get_user_form_data()
         firstname: $("#firstname").val(),
         lastname: $("#surname").val(),
         birthdate: $("#birth-date").val(),
-        gender: gender,
+        gender: get_gender(),
         amka: $("#amka").val(),
         country: $("#country").val(),
         city: $("#city").val(),
@@ -25,10 +25,10 @@ function get_user_form_data()
         telephone: $("#telephone").val(),
         height: $("#height").val(),
         weight: $("#weight").val(),
-        blooddonor: blood_donor,
+        blooddonor: get_blood_donor(),
         bloodtype: $("#blood-type").val(),
-        specialty: speciality,
-        doctor_info: doctor_info
+        specialty: get_doctor_specialty(),
+        doctor_info: get_doctor_info()
 
     };
     return data;
@@ -45,4 +45,32 @@ function get_gender()
         gender = "female"
     }
     return gender
+}
+function  get_blood_donor()
+{
+    var blood_donor
+    if ($('#blood-giver').is(':checked')) {
+        blood_donor = 1
+    } else {
+        blood_donor = 0
+    }
+    return blood_donor
+}
+
+function get_doctor_specialty()
+{
+    if ($('#doctor-radio').is(':checked')) {
+        return  $("#dc-speciality").val()
+
+    }
+    return null;
+}
+function get_doctor_info()
+{
+    if ($('#doctor-radio').is(':checked')) {
+
+        return  $("#doctor-text-area").val()
+    }
+    return null;
+
 }
