@@ -5,10 +5,15 @@
  */
 package rest_api;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import database.tables.EditBloodTestTable;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
@@ -23,7 +28,12 @@ import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import static javax.ws.rs.core.Response.status;
+import mainClasses.BloodTest;
 
 /**
  * REST Web Service
@@ -52,11 +62,61 @@ public class Examinations {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("blood")
+    @Path("/bloodTests/{AMKA}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        return "{xaxa:ok}";
+    public Response getBloodTests(
+            @PathParam("AMKA") String amka,
+            @QueryParam("fromDate") String from,
+            @QueryParam("toDate") String to) throws SQLException, ParseException, ClassNotFoundException {
+        EditBloodTestTable blood_test_obj = new EditBloodTestTable();
+        String json_resp = "";
+        JsonArray json_array = new JsonArray();
+
+        if (from != null && to != null) {
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date startDate = formatter.parse(from);
+            java.util.Date endDate = formatter.parse(to);
+            Calendar start = Calendar.getInstance();
+            start.setTime(startDate);
+            Calendar end = Calendar.getInstance();
+            end.setTime(endDate);
+            if (startDate.after(endDate)) {
+
+                Response.Status status = Response.Status.NOT_ACCEPTABLE;
+                return Response.status(status).type("application/json").entity("{error: start date must be before end date").build();
+            }
+
+            for (java.util.Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                // Do your job here with `date`.
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                String datee = simpleDateFormat.format(date);
+
+                try {
+
+                    BloodTest bt = blood_test_obj.databaseToBloodTest(amka, datee);
+                    if (bt != null) {
+
+                        json_resp = blood_test_obj.bloodTestToJSON(bt);
+                        JsonParser parser = new JsonParser();
+                        JsonObject blood_test_json = parser.parse(json_resp).getAsJsonObject();
+                        json_array.add(blood_test_json);
+                    }
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            json_array = blood_test_obj.BloodTestToJsonArray(amka);
+
+        }
+
+        System.out.println(json_array);
+
+        Response.Status status = Response.Status.ACCEPTED;
+        return Response.status(status).type("application/json").entity(json_array.toString()).build();
     }
 
     /**
@@ -75,6 +135,7 @@ public class Examinations {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addNewBloodTest(String json) {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+
         String date = jsonObject.get("test_date").getAsString();
         boolean isDateFuture = isDateFuture(date, "yyyy-MM-dd");
         Response.Status status;
@@ -96,17 +157,16 @@ public class Examinations {
             return Response.status(status).type("application/json").entity(res).build();
         }
 
-        /*
         try {
             EditBloodTestTable blood_test_obj = new EditBloodTestTable();
-            blood_test_obj.addBloodTestFromJSON("");
+            blood_test_obj.addBloodTestFromJSON(json);
             status = Response.Status.OK;
             res = "{ok: blood test added succesfuly";
             return Response.status(status).type("application/json").entity(res).build();
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         res = "{response:ok}";
         status = Response.Status.OK;
         return Response.status(status).type("application/json").entity(res).build();
@@ -150,7 +210,6 @@ public class Examinations {
     private int check_measurement(String measurement, found_measurement _found_measurement, JsonObject json) {
         if (json.get(measurement) != null) {
             _found_measurement.found_measurement = true;
-            System.out.println("lololol");
             if (json.get(measurement).getAsDouble() < 0) {
                 return NEGATIVE_MEASUREMENT;
             }
