@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,6 +45,29 @@ public class EditBloodTestTable {
         return json;
     }
 
+    public JsonArray BloodTestExaminationToJsonArray(String amka, String exam) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        JsonArray json_array = new JsonArray();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT test_date, medical_center," + exam + ", " + exam + "_level " + "FROM bloodtest WHERE amka= '" + amka + "'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                JsonParser parser = new JsonParser();
+                JsonObject blood_test_json = parser.parse(json).getAsJsonObject();
+                json_array.add(blood_test_json);
+            }
+            System.out.println(json_array.toString());
+            return json_array;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public JsonArray BloodTestToJsonArray(String amka) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -59,6 +83,29 @@ public class EditBloodTestTable {
                 json_array.add(blood_test_json);
             }
             return json_array;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static ArrayList<BloodTest> getAllBloodTests(String amka) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<BloodTest> btl = new ArrayList<BloodTest>();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bloodtest WHERE amka= '" + amka + "'");
+            while (rs.next()) {
+
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                BloodTest bt = gson.fromJson(json, BloodTest.class);
+                btl.add(bt);
+            }
+            return btl;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
@@ -83,6 +130,21 @@ public class EditBloodTestTable {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public boolean bloodTestIdExists(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT bloodtest_id FROM bloodtest WHERE bloodtest_id= '" + id + "'");
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EditBloodTestTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     public void updateBloodTest(int id, double chol) throws SQLException, ClassNotFoundException {

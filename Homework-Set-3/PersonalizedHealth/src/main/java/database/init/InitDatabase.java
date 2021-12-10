@@ -33,6 +33,7 @@ public class InitDatabase {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         InitDatabase init = new InitDatabase();
+        init.dropDatabase();
         init.initDatabase();
         init.initTables();
         init.addToDatabaseExamples();
@@ -40,6 +41,14 @@ public class InitDatabase {
         init.databaseToJSON();
 
         // init.deleteRecords();
+    }
+
+    public void dropDatabase() throws SQLException, ClassNotFoundException {
+        Connection conn = getInitialConnection();
+        Statement stmt = conn.createStatement();
+        stmt.execute("DROP DATABASE HY359");
+        stmt.close();
+        conn.close();
     }
 
     public void initDatabase() throws SQLException, ClassNotFoundException {
@@ -77,7 +86,7 @@ public class InitDatabase {
                 + "\"amka\":\"03069200000\",\"country\":\"Greece\",\"city\":\"Heraklion\",\"address\":\"CSD Voutes\",\"lat\":\"35.3053121\","
                 + "\"lon\":\"25.0722869\",\"telephone\":\"1234567890\",\"height\":\"173\",\"weight\":\"82.0\",\"blooddonor\":\"1\","
                 + "\"bloodtype\":\"A+\"}";
-        
+
         String admin = "{\"username\":\"admin\",\"email\":\"admin@admin.gr\","
                 + "\"password\":\"admin12*\","
                 + "\"firstname\":\"Admin\",\"lastname\":\"Admin\",\"birthdate\":\"1970-01-01"
@@ -99,8 +108,8 @@ public class InitDatabase {
                 + "\"specialty\":\"GeneralDoctor\","
                 + "\"doctor_info\":\"Exei megali empiria se axiologisi emvoliwn.\","
                 + "\"certified\":\"1\""
-                + "}"; 
-         String jsonDoctor2 = "{\"username\":\"stefanos\",\"email\":\"stefanos@doctor.gr\",\"password\":\"abcd12$3\","
+                + "}";
+        String jsonDoctor2 = "{\"username\":\"stefanos\",\"email\":\"stefanos@doctor.gr\",\"password\":\"abcd12$3\","
                 + "\"firstname\":\"Stefanos\",\"lastname\":\"Kapelakis\",\"birthdate\":\"1958-01-10\",\"gender\":\"Male\","
                 + "\"amka\":\"10015800234\",\"country\":\"Greece\",\"city\":\"Heraklion\",\"address\":\"Kalokairinou 50\",\"lat\":\"35.3376963\","
                 + "\"lon\":\"25.1276121\",\"telephone\":\"2810654321\",\"height\":\"170\",\"weight\":\"68.0\",\"blooddonor\":\"0\","
@@ -108,7 +117,7 @@ public class InitDatabase {
                 + "\"specialty\":\"Pathologist\","
                 + "\"doctor_info\":\"O kaluteros giatros gia ti gripi.\","
                 + "\"certified\":\"1\""
-                + "}"; 
+                + "}";
         String jsonDoctor3 = "{\"username\":\"papadopoulou\","
                 + "\"email\":\"papadopoulou@doctor.gr\",\"password\":\"doct12##\","
                 + "\"firstname\":\"Eleni\",\"lastname\":\"Papopoulou\",\"birthdate\":\"1980-05-05\",\"gender\":\"Female\","
@@ -119,7 +128,7 @@ public class InitDatabase {
                 + "\"specialty\":\"GeneralDoctor\","
                 + "\"doctor_info\":\"Exei kanei metaptyxiakes spoudes stin ameriki.\","
                 + "\"certified\":\"1\""
-                + "}"; 
+                + "}";
         String jsonDoctor4 = "{\"username\":\"aggelopoulos\",\"email\":\"aggelopoulos@doctor.gr\","
                 + "\"password\":\"agge58$1\","
                 + "\"firstname\":\"Giorgos\",\"lastname\":\"Aggelopoulos\",\"birthdate\":\"1978-01-12\","
@@ -132,12 +141,12 @@ public class InitDatabase {
                 + "\"specialty\":\"Pathologist\","
                 + "\"doctor_info\":\"Kathigitis iatrikis sto panepistimio.\","
                 + "\"certified\":\"1\""
-                + "}"; 
-     
-         String jsonDoctor5 = "{\"username\":\"papatheodorou\",\"email\":\"papatheodorou@doctor.gr\","
+                + "}";
+
+        String jsonDoctor5 = "{\"username\":\"papatheodorou\",\"email\":\"papatheodorou@doctor.gr\","
                 + "\"password\":\"papap$75\","
                 + "\"firstname\":\"Konstantina\",\"lastname\":\"Papatheodorou\","
-                 + "\"birthdate\":\"1968-01-03\","
+                + "\"birthdate\":\"1968-01-03\","
                 + "\"gender\":\"Female\","
                 + "\"amka\":\"03016800111\",\"country\":\"Greece\",\"city\":\"Heraklion\","
                 + "\"address\":\"Leoforos 62 Martyron 100\",\"lat\":\"35.3361846\","
@@ -147,15 +156,15 @@ public class InitDatabase {
                 + "\"specialty\":\"Pathologist\","
                 + "\"doctor_info\":\"Exei empiria se zaxaro kai xolisterini.\","
                 + "\"certified\":\"1\""
-                + "}"; 
-        
+                + "}";
+
         EditDoctorTable edt = new EditDoctorTable();
         edt.addDoctorFromJSON(jsonDoctor);
         edt.addDoctorFromJSON(jsonDoctor2);
         edt.addDoctorFromJSON(jsonDoctor3);
         edt.addDoctorFromJSON(jsonDoctor4);
         edt.addDoctorFromJSON(jsonDoctor5);
-         //BloodTest
+        //BloodTest
         EditBloodTestTable ebt = new EditBloodTestTable();
         String bloodTestjson = "{\"amka\":\"03069200000\",\"test_date\":\"2021-10-11\",\"medical_center\":\"pagni\","
                 + "\"blood_sugar\":\"100.0\","

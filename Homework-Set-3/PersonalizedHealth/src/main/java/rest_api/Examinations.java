@@ -28,9 +28,12 @@ import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import static javax.ws.rs.core.Response.status;
 import mainClasses.BloodTest;
@@ -117,16 +120,6 @@ public class Examinations {
 
         Response.Status status = Response.Status.ACCEPTED;
         return Response.status(status).type("application/json").entity(json_array.toString()).build();
-    }
-
-    /**
-     * PUT method for updating or creating an instance of Examinations
-     *
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
     }
 
     @POST
@@ -224,6 +217,144 @@ public class Examinations {
         LocalDate inputDate = LocalDate.parse(date, dtf);
 
         return inputDate.isAfter(localDate);
+    }
+
+    @GET
+    @Path("/bloodTests/{AMKA}/{Measure}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMeasure(
+            @PathParam("AMKA") String amka,
+            @PathParam("Measure") String measure
+    ) {
+        String res = "";
+        Response.Status status;
+        if (!amka_exists(amka)) {
+            status = Response.Status.NOT_ACCEPTABLE;
+            res = "{error: amka doesn't exist";
+            return Response.status(status).type("application/json").entity(res).build();
+        } else {
+            JsonArray json_array = new JsonArray();
+            EditBloodTestTable blood_test_obj = new EditBloodTestTable();
+
+            try {
+                json_array = blood_test_obj.BloodTestExaminationToJsonArray(amka, measure);
+
+                status = Response.Status.ACCEPTED;
+                return Response.status(status).type("application/json").entity(json_array.toString()).build();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+
+    }
+
+    public boolean amka_exists(String amka) {
+        ArrayList< BloodTest> blood_tests = new ArrayList<>();
+        try {
+            blood_tests = EditBloodTestTable.getAllBloodTests(amka);
+            if (blood_tests != null && !blood_tests.isEmpty()) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @PUT
+    @Path("/bloodTest/{bloodTestID}/{measure}/{value}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateMeasure(
+            @PathParam("bloodTestID") int blood_test_id,
+            @PathParam("measure") String measure,
+            @PathParam("value") double value
+    ) {
+        String res = "";
+        Response.Status status;
+        EditBloodTestTable blood_test_table = new EditBloodTestTable();
+
+        if (value <= 0) {
+            status = Response.Status.NOT_ACCEPTABLE;
+            res = "{error: measurements can only have a positive value}";
+            return Response.status(status).type("application/json").entity(res).build();
+        }
+        if (measure == null || !measure.equals("blood_sugar") && !measure.equals("cholesterol") && !measure.equals("iron") && !measure.equals("vitamin_d3") && !measure.equals("vitamin_b12")) {
+            status = Response.Status.NOT_ACCEPTABLE;
+            res = "{error: Wrong measurement name}";
+            return Response.status(status).type("application/json").entity(res).build();
+        }
+        try {
+            if (!blood_test_table.bloodTestIdExists(blood_test_id)) {
+                status = Response.Status.FORBIDDEN;
+                res = "{error: blood test id deosn't exist}";
+                return Response.status(status).type("application/json").entity(res).build();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        status = Response.Status.NOT_ACCEPTABLE;
+        res = "{error: some error occured}";
+        try {
+            blood_test_table.updateBloodTest(blood_test_id, value);
+            status = Response.Status.OK;
+            res = "{ok: succesfuly updated the blood test}";
+            return Response.status(status).type("application/json").entity(res).build();
+        } catch (SQLException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.status(status).type("application/json").entity(res).build();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.status(status).type("application/json").entity(res).build();
+
+        }
+
+    }
+
+    @DELETE
+    @Path("/bloodTestDeletion/{bloodTestID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response bloodTestDelete(
+            @PathParam("bloodTestID") int blood_test_id
+    ) {
+        String res = "";
+        Response.Status status;
+        EditBloodTestTable blood_test_table = new EditBloodTestTable();
+        try {
+            if (!blood_test_table.bloodTestIdExists(blood_test_id)) {
+                status = Response.Status.FORBIDDEN;
+                res = "{error: blood test id doesn't exist}";
+                return Response.status(status).type("application/json").entity(res).build();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            blood_test_table.deleteBloodTest(blood_test_id);
+            status = Response.Status.OK;
+            res = "{ok: blood test successfuly deleted}";
+            return Response.status(status).type("application/json").entity(res).build();
+        } catch (SQLException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        status = Response.Status.FORBIDDEN;
+        res = "{error: blood test id deosn't exist}";
+        return Response.status(status).type("application/json").entity(res).build();
+
     }
 
 }
