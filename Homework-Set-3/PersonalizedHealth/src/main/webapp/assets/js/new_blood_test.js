@@ -12,7 +12,6 @@ function lala(data, key, value)
 }
 function send_new_blood_test()
 {
-    console.log("lalala")
     let myForm = document.getElementById('myForm');
     let formData = new FormData(myForm);
     const data = {};

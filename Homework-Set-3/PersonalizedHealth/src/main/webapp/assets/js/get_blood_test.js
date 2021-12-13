@@ -33,7 +33,6 @@ function get_blood_tests()
         url += "&toDate=" + to_date
 
     }
-    console.log(url)
 
     sendXmlGetRequest(url, callback, callback_error)
 }

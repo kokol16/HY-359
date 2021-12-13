@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import database.tables.EditBloodTestTable;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -59,6 +60,21 @@ public class Examinations {
     public Examinations() {
     }
 
+    public boolean isValidDate(String dateStr) {
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dateStr);
+        } catch (org.apache.http.ParseException e) {
+            return false;
+        } catch (ParseException ex) {
+            return false;
+
+        }
+
+        return true;
+    }
+
     /**
      * Retrieves representation of an instance of rest_api.Examinations
      *
@@ -71,11 +87,12 @@ public class Examinations {
             @PathParam("AMKA") String amka,
             @QueryParam("fromDate") String from,
             @QueryParam("toDate") String to) throws SQLException, ParseException, ClassNotFoundException {
+        System.out.println("omggggggggggggggggggggggg");
         EditBloodTestTable blood_test_obj = new EditBloodTestTable();
         String json_resp = "";
         JsonArray json_array = new JsonArray();
         System.out.println(amka + " " + from + " " + to);
-        if (from != null && to != null) {
+        if (isValidDate(from) && isValidDate(to)) {
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date startDate = formatter.parse(from);
@@ -85,9 +102,9 @@ public class Examinations {
             Calendar end = Calendar.getInstance();
             end.setTime(endDate);
             if (startDate.after(endDate)) {
-
+                json_resp = "{ \"error\":\"start date must be before end date\"}";
                 Response.Status status = Response.Status.NOT_ACCEPTABLE;
-                return Response.status(status).type("application/json").entity("{error: start date must be before end date").build();
+                return Response.status(status).type("application/json").entity(json_resp).build();
             }
 
             for (java.util.Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
@@ -111,6 +128,7 @@ public class Examinations {
                 }
             }
         } else {
+            System.out.println("not a valid date");
             json_array = blood_test_obj.BloodTestToJsonArray(amka);
 
         }
@@ -134,17 +152,19 @@ public class Examinations {
         String res;
         handle_measurements(jsonObject);
         if (isDateFuture) {
-            res = "{error: future date}";
+            res = "{ \"error\":\"future date\"}";
+
             status = Response.Status.NOT_ACCEPTABLE;
             return Response.status(status).type("application/json").entity(res).build();
         }
         int result = handle_measurements(jsonObject);
         if (result == NO_MEASUREMENTS_FOUND) {
-            res = "{error: No measurements found}";
+            res = "{ \"error\":\"No measurements found\"}";
+
             status = Response.Status.NOT_ACCEPTABLE;
             return Response.status(status).type("application/json").entity(res).build();
         } else if (result == NEGATIVE_MEASUREMENT) {
-            res = "{error: Negative measurements found}";
+            res = "{ \"error\":\"Negative measurements found\"}";
             status = Response.Status.NOT_ACCEPTABLE;
             return Response.status(status).type("application/json").entity(res).build();
         }
@@ -153,7 +173,7 @@ public class Examinations {
             EditBloodTestTable blood_test_obj = new EditBloodTestTable();
             blood_test_obj.addBloodTestFromJSON(json);
             status = Response.Status.OK;
-            res = "{ok: blood test added succesfuly}";
+            res = "{ \"ok\":\"blood test added succesfuly\"}";
             return Response.status(status).type("application/json").entity(res).build();
 
         } catch (ClassNotFoundException ex) {
@@ -202,7 +222,7 @@ public class Examinations {
     private int check_measurement(String measurement, found_measurement _found_measurement, JsonObject json) {
         if (json.get(measurement) != null) {
             _found_measurement.found_measurement = true;
-            if (json.get(measurement).getAsDouble() < 0) {
+            if (json.get(measurement) != null && json.get(measurement).getAsDouble() < 0) {
                 return NEGATIVE_MEASUREMENT;
             }
         }
