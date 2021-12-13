@@ -129,6 +129,8 @@ public class EditBloodTestTable {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
+        stmt.close();
+        con.close();
         return null;
     }
 

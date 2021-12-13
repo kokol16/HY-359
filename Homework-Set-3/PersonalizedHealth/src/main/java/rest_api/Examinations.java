@@ -74,7 +74,7 @@ public class Examinations {
         EditBloodTestTable blood_test_obj = new EditBloodTestTable();
         String json_resp = "";
         JsonArray json_array = new JsonArray();
-
+        System.out.println(amka + " " + from + " " + to);
         if (from != null && to != null) {
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -91,7 +91,6 @@ public class Examinations {
             }
 
             for (java.util.Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-                // Do your job here with `date`.
                 String pattern = "yyyy-MM-dd";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 String datee = simpleDateFormat.format(date);
@@ -154,7 +153,7 @@ public class Examinations {
             EditBloodTestTable blood_test_obj = new EditBloodTestTable();
             blood_test_obj.addBloodTestFromJSON(json);
             status = Response.Status.OK;
-            res = "{ok: blood test added succesfuly";
+            res = "{ok: blood test added succesfuly}";
             return Response.status(status).type("application/json").entity(res).build();
 
         } catch (ClassNotFoundException ex) {
@@ -352,7 +351,7 @@ public class Examinations {
             Logger.getLogger(Examinations.class.getName()).log(Level.SEVERE, null, ex);
         }
         status = Response.Status.FORBIDDEN;
-        res = "{error: blood test id deosn't exist}";
+        res = "{error: blood test id doesn't exist}";
         return Response.status(status).type("application/json").entity(res).build();
 
     }

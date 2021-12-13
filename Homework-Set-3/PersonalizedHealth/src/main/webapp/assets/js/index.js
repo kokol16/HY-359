@@ -7,22 +7,24 @@
 
 function new_blood_test()
 {
-    console.log("lalala")
     $("#content").load("new_blood_test.html");
 }
 function get_blood_tests()
 {
-    
+    $("#content").load("get_blood_tests.html");
+
 }
 function get_measure()
 {
-    
+    $("#content").load("get_blood_test_measure.html");
+
 }
 function  update_blood_test()
 {
-    
+    $("#content").load("update_blood_test.html");
 }
 function delete_blood_test()
 {
-    
+    $("#content").load("delete_blood_test.html");
+
 }

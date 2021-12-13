@@ -17,7 +17,7 @@
         <script src="assets/js/requests_api.js"></script>
 
         <script src="assets/js/index.js"></script>
-        <script src="assets/js/new_blood_test.js"></script>
+        <script src="assets/js/get_blood_test_measure.js"></script>
 
 
         <link rel="stylesheet" href="assets/css/style.css">
@@ -28,44 +28,27 @@
 
             <div class="form-card col-xl-6 col-xxl-4 col-lg-6 col-md-8 col-sm-8 container-fluid ">
                 <form id="myForm">
-                    <div class="form-group row justify-content-start mt-2">
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
 
-                            <input type="date" name="test_date" id="test-date" class="form-control" value="1980-01-01" min="1920-01-01"
-                                   max="2005-12-31" required>
-
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
-                            <input type="text" id="medical-center" class="form-control"  name="medical_center" placeholder="medical center" required>
-                        </div>
-                    </div>
                     <div class="form-group row justify-content-start mt-2">
+
                         <div class="col-lg-5 col-md-6 col-sm-6 ">
 
                             <input type="text" id="amka" name="amka" class="form-control" pattern="[0-9]{11}" placeholder="Enter AMKA"
                                    required>
                         </div>
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
-                            <input type="number" id="blood_sugar" class="form-control"  name="blood_sugar" placeholder="blood sugar">
+                        <div class="col-lg-6 dropdown">
+                            <select  id="measure"   required>
+                                <option value="">Choose Measure</option>
+                                <option value="vitamin_d3">vitamin_d3</option>
+                                <option value="vitamin_b12">vitamin_b12-</option>
+                                <option value="cholesterol">cholesterol</option>
+                                <option value="blood_sugar">blood_sugar</option>
+                                <option value="iron">iron</option>
+                            </select>
                         </div>
 
                     </div>
-                    <div class="form-group row justify-content-start mt-2">
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
-                            <input type="number" id="vitamin_b12" class="form-control"  name="vitamin_b12" placeholder="vitamin_b12r">
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
-                            <input type="number" id="vitamin_d3" class="form-control"  name="vitamin_d3" placeholder="vitamin_d3">
-                        </div>
-                    </div>
-                    <div class="form-group row justify-content-start mt-2">
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
-                            <input type="number" id="cholesterol" class="form-control"  name="cholesterol" placeholder="cholesterol">
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-6 ">
-                            <input type="number" id="iron" class="form-control"  name="iron" placeholder="iron">
-                        </div>
-                    </div>
+
 
 
                     <div class="form-group row justify-content-start mt-2">
@@ -73,7 +56,7 @@
 
                         </div>
                         <div class="col-lg-4">
-                            <button type="button" id="submit-buttonn" onclick="  send_new_blood_test(); return false;">submit</button>
+                            <button type="button" id="submit-buttonn" onclick="  get_measure(); return false;">submit</button>
                         </div>
 
 
