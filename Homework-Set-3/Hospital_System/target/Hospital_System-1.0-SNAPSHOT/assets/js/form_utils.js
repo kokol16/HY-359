@@ -179,7 +179,11 @@ $(document).ready(function () {
     $("#email").change(check_if_email_exists);
     $("#amka").change(check_if_amka_exists);
 
-
+    $('#register-form').on('submit', function (e)
+    {
+        console.log("omg")
+        send_form_to_server(e)
+    })
 
     $("#check-show-pswd").click(handle_pswd_visibility);
     $("input[name=type-of-user-radio]").click(handle_doctor_radio_button);
@@ -190,13 +194,14 @@ function callback_register(response)
 {
 
     $("#error").html(remove_str($("#error").html(), " register error"))
-    $("#page-container").addClass("d-none")
+     document.getElementById("register-form").style.display="none";
     $("#after_register").html("register successful<br>" + response)
 
 }
 var url = "http://localhost:8080/Hospital_System/"
 
-function send_form_to_server() {
+function send_form_to_server(e) {
+    console.log("omgg")
     /*
      if (!valid_amka || !valid_email || !valid_username)
      {
@@ -204,15 +209,16 @@ function send_form_to_server() {
      return
      
      }*/
+    e.preventDefault();
     var speciality = null;
     var doctor_info = null;
-    var register_url = url + "register"
- 
-   
+    var register_url = "register"
+
+
 
     var data = get_user_form_data()
+    console.log(data)
     sendXmlPostRequest(register_url, data, callback_register, call_back_error_register);
-    return false
 
 }
 function check_if_amka_exists()
@@ -220,7 +226,6 @@ function check_if_amka_exists()
     var check_amka_url = url + "check_amka"
     var amka = $("#amka").val()
     var data = {amka: amka}
-    console.log(data)
     sendXmlPostRequest(check_amka_url, data, call_back_check_amka, call_back_error_amka);
 }
 
@@ -229,7 +234,6 @@ function check_if_username_exists()
     var check_username_url = url + "check_username"
     var user_name = $("#username").val()
     var data = {username: user_name}
-    console.log(data)
     sendXmlPostRequest(check_username_url, data, call_back_check_username, call_back_error_username);
 }
 function check_if_email_exists()
@@ -237,7 +241,6 @@ function check_if_email_exists()
     var check_email_url = url + "check_email"
     var email = $("#email").val()
     var data = {email: email}
-    console.log(data)
     sendXmlPostRequest(check_email_url, data, call_back_check_email, call_back_error_email);
 }
 function call_back_check_email(response)
@@ -245,10 +248,13 @@ function call_back_check_email(response)
     $("#error").html(remove_str($("#error").html(), " email already exists"))
 
     console.log(response)
+    $("#submit-button").prop("disabled", false);
+
 }
 function call_back_check_amka(response)
 {
     $("#error").html(remove_str($("#error").html(), " Amka already exists"))
+    $("#submit-button").prop("disabled", false);
 
     console.log(response)
 }
@@ -256,6 +262,7 @@ function call_back_check_amka(response)
 function call_back_check_username(response)
 {
     $("#error").html(remove_str($("#error").html(), " username already exists"))
+    $("#submit-button").prop("disabled", false);
 
     console.log(response)
 }
@@ -265,6 +272,8 @@ function call_back_error_username()
     valid_username = false
     if (!text.includes(" username already exists"))
         $("#error").html(text + " username already exists");
+    $("#submit-button").prop("disabled", true);
+
 }
 function call_back_error_email()
 {
@@ -272,6 +281,8 @@ function call_back_error_email()
     valid_email = false
     if (!text.includes(" email already exists"))
         $("#error").html(text + " email already exists");
+    $("#submit-button").prop("disabled", true);
+
 }
 function call_back_error_amka()
 {
@@ -279,6 +290,7 @@ function call_back_error_amka()
     valid_amka = false
     if (!text.includes(" Amka already exists"))
         $("#error").html(text + " Amka already exists");
+    $("#submit-button").prop("disabled", true);
 }
 
 function call_back_error_register()

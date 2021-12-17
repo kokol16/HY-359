@@ -35,7 +35,7 @@
             <div style="text-align: center; color: red" id="error"></div>
 
             <div class="form-card col-xl-6 col-xxl-4 col-lg-6 col-md-8 col-sm-8 container-fluid ">
-                <form>
+                <form id="register-form">
                     <div class="form-group row justify-content-start mt-2 ">
                         <div class="col-lg-5 col-md-6 col-sm-6  ">
                             <input type="text" id="username" class="form-control" placeholder="Enter username" pattern="[a-z A-Z]{8,}"
@@ -521,7 +521,7 @@
 
                         </div>
                         <div class="col-lg-4">
-                            <button type="button" id="submit-buttonn"     onclick="  send_form_to_server(); return false;" >Sign up</button>
+                            <button type="submit" id="submit-button"  >Sign up</button>
                         </div>
 
 

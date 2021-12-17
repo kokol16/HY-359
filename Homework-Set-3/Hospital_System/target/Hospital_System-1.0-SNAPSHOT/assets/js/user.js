@@ -1,5 +1,5 @@
 
-function update_data() {
+function update_data(e) {
     var gender
     if ($('#man').is(':checked')) {
         gender = "male"
@@ -35,16 +35,20 @@ function update_data() {
         bloodtype: $("#blood-type").val(),
 
     };
+    e.preventDefault();
+
     console.log(data)
     sendXmlPostRequest("/Hospital_System/user", data, call_back_update_data, call_back_error_update_data);
-    return false
 }
 function call_back_update_data(response)
 {
+    get_data()
+    $("#after_register").html("data updated succesfully")
     console.log(response)
 }
-function call_back_error_update_data()
+function call_back_error_update_data(response)
 {
+    $("#error").html("error occured " + response)
 }
 function fill_user_info(responseData) {
     console.log(responseData)
@@ -95,6 +99,11 @@ $(document).ready(function () {
     $("#bmi").click(calculate_and_display_bmi)
     $("#ideal-weight").click(calculate_and_display_ideal_weight)
 
+    $('#update-user-form').on('submit', function (e)
+    {
+        update_data(e)
+    })
+
 });
 
 function calculate_and_display_bmi()
@@ -107,6 +116,7 @@ function calculate_and_display_bmi()
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
             var json = JSON.parse(this.responseText)
+            console.log(json)
             $("#bmi-text").html("you have " + json.data.health + " BMI!")
         }
     });
@@ -128,7 +138,10 @@ function calculate_and_display_ideal_weight() {
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
+
             var json = JSON.parse(this.responseText)
+            console.log(json)
+
             $("#ideal-weight-text").html("ideal weight is " + json.data.Devine + " kg")
         }
     });

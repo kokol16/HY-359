@@ -44,10 +44,12 @@ public class register extends HttpServlet {
         JsonObject user_json = JsonParser.parseString(json_str).getAsJsonObject();
         JsonElement specialty = user_json.get("specialty");
         json_str = eliminate_special_characters(json_str);
-
+        System.out.println(json_str);
+        String msg = "";
         if (specialty.isJsonNull()) {
 
             EditSimpleUserTable simple_user_obj = new EditSimpleUserTable();
+            msg = "register completed succesfully";
             try {
                 System.out.println(json_str);
 
@@ -60,6 +62,8 @@ public class register extends HttpServlet {
             }
         } else {
             EditDoctorTable doctor_edit_obj = new EditDoctorTable();
+            msg = "register completed but the admin need to certify you";
+
             try {
                 doctor_edit_obj.addDoctorFromJSON(json_str);
             } catch (ClassNotFoundException ex) {
@@ -69,7 +73,7 @@ public class register extends HttpServlet {
             }
         }
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().write(json_str);
+        response.getWriter().write(msg+"\n"+json_str);
 
     }
 
