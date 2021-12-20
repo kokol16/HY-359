@@ -31,6 +31,7 @@ function update_blood_test()
 
     var amka = $("#blood-id").val()
     var measure = $("#measure").val();
+    console.log(measure)
     var val = $("#value").val();
 
 

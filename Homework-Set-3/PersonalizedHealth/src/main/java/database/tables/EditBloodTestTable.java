@@ -149,13 +149,38 @@ public class EditBloodTestTable {
         return false;
     }
 
-    public void updateBloodTest(int id, double chol) throws SQLException, ClassNotFoundException {
+    public void updateBloodTest(int id, double value, String test) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         BloodTest bt = new BloodTest();
-        bt.setCholesterol(chol);
-        bt.setCholesterol_level();
-        String update = "UPDATE bloodtest SET cholesterol='" + chol + "', cholesterol_level='" + bt.getCholesterol_level() + "' WHERE bloodtest_id = '" + id + "'";
+        String update = "";
+        if (test.equals("cholesterol")) {
+            bt.setCholesterol(value);
+            bt.setCholesterol_level();
+            update = "UPDATE bloodtest SET " + test + "='" + value + "', " + test + "_level='" + bt.getCholesterol_level() + "' WHERE bloodtest_id = '" + id + "'";
+
+        } else if (test.equals("blood_sugar")) {
+            bt.setBlood_sugar(value);
+            bt.setBlood_sugar_level();
+            update = "UPDATE bloodtest SET " + test + "='" + value + "'," + test + "_level='" + bt.getBlood_sugar_level() + "' WHERE bloodtest_id = '" + id + "'";
+
+        } else if (test.equals("iron")) {
+            bt.setIron(value);
+            bt.setIron_level();
+            update = "UPDATE bloodtest SET " + test + "='" + value + "'," + test + "_level='" + bt.getIron_level() + "' WHERE bloodtest_id = '" + id + "'";
+
+        } else if (test.equals("vitamin_d3")) {
+            bt.setVitamin_d3(value);
+            bt.setVitamin_d3_level();
+            update = "UPDATE bloodtest SET " + test + "='" + value + "'," + test + "_level='" + bt.getVitamin_d3_level() + "' WHERE bloodtest_id = '" + id + "'";
+
+        } else if (test.equals("vitamin_b12")) {
+            bt.setVitamin_b12(value);
+            bt.setVitamin_b12_level();
+            update = "UPDATE bloodtest SET " + test + "='" + value + "'," + test + "_level='" + bt.getVitamin_b12_level() + "' WHERE bloodtest_id = '" + id + "'";
+
+        }
+        System.out.println(update);
         stmt.executeUpdate(update);
     }
 

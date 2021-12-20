@@ -324,7 +324,7 @@ public class Examinations {
         status = Response.Status.NOT_ACCEPTABLE;
         res = "{error: some error occured}";
         try {
-            blood_test_table.updateBloodTest(blood_test_id, value);
+            blood_test_table.updateBloodTest(blood_test_id, value,measure);
             status = Response.Status.OK;
             res = "{ok: succesfuly updated the blood test}";
             return Response.status(status).type("application/json").entity(res).build();

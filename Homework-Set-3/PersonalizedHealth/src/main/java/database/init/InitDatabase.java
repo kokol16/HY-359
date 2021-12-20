@@ -247,7 +247,7 @@ public class InitDatabase {
         edt.updateDoctor("mountanton", 190);
 
         EditBloodTestTable ebt = new EditBloodTestTable();
-        ebt.updateBloodTest(1, 180);
+        ebt.updateBloodTest(1, 180,"iron");
 
         EditRandevouzTable er = new EditRandevouzTable();
         er.updateRandevouz(1, 1, "Provlima Me vitamini", "selected");
